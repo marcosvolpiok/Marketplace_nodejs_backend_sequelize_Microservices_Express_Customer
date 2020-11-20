@@ -1,7 +1,7 @@
 const controller = {};
 const Server = require('../models/server');
 
-controller.list = async (req, res) => {
+controller.list = (req, res) => {
     Server.findAll({ attributes: ['id', 'name'] })
     .then(servers => {
       res.json(servers)
@@ -11,28 +11,10 @@ controller.list = async (req, res) => {
     })
 }
 
-controller.listById = async (req, res) => {
-    const sites = await Site.find({_id: req.params.id});
-    res.send(sites);
-}
-
 controller.add = async (req, res) => {
+    const server = await Server.create(req.body);
     console.log(req.body);
-    const site = new Site(req.body);
-    await site.save();
-    res.send(site);
-}
-
-controller.update = async (req, res) => {
-    const { id } = req.params;
-    const site = await Site.update({_id: id}, req.body);
-    res.send(site);
-}
-
-controller.delete = async (req, res) => {
-    const { id } = req.params;
-    const site = await Site.remove({_id: id});
-    res.send(site);
+    res.send(server);
 }
 
 module.exports = controller;
