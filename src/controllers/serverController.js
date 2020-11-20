@@ -2,16 +2,11 @@ const controller = {};
 const Server = require('../models/server');
 
 controller.list = async (req, res) => {
-    console.log('antes');
-
-
     Server.findAll({ attributes: ['id', 'name'] })
     .then(servers => {
-      console.log('sitess', servers)
       res.json(servers)
     })
     .catch(err => {
-        console.log('Errrror', err);
         res.send({error: err.message});
     })
 }
