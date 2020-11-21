@@ -3,3 +3,10 @@ CREATE TABLE `servers_meli`.`servers` (
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
+
+
+  ALTER TABLE `servers_meli`.`servers` 
+ADD COLUMN `description` VARCHAR(255) NOT NULL AFTER `server`,
+ADD COLUMN `created_at` DATETIME NOT NULL AFTER `description`,
+ADD COLUMN `server_type` VARCHAR(255) NOT NULL AFTER `created_at`,
+CHANGE COLUMN `name` `server` VARCHAR(255) NOT NULL ;

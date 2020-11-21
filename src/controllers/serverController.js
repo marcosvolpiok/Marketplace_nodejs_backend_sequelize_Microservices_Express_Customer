@@ -1,5 +1,6 @@
 const controller = {};
 const Server = require('../models/server');
+const moment = require('moment');
 
 controller.list = (req, res) => {
     Server.findAll({ attributes: ['id', 'name'] })
@@ -12,8 +13,9 @@ controller.list = (req, res) => {
 }
 
 controller.add = async (req, res) => {
-    const server = await Server.create(req.body);
-    console.log(req.body);
+    let params=req.body;
+    params.created_at=moment(moment(req.body.created_at, 'hh-mm-ss-DD-MM-YYYY')).format('YYYY-MM-DD hh:mm:ss');
+    const server = await Server.create(params);
     res.send(server);
 }
 

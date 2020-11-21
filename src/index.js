@@ -6,7 +6,7 @@ const express = require('express'),
     Sequelize = require('sequelize');
 
 
-
+try{
 // importing routes
 const indexRoutes = require('./routes/index');
 
@@ -31,3 +31,6 @@ app.use('/', indexRoutes);
 app.listen(app.get('port'), () => {
     console.log(`server on port ${app.get('port')}`);
 });
+}catch(e){
+    console.log(`Exeption in server: ${e.message}`);
+}
