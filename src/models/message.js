@@ -11,8 +11,7 @@ const Message = sequelize.define('messages', {
             model: 'servers',
             key: 'id',
         }
-    }
-},
+    }},
 {
     timestamps: false,
 });
