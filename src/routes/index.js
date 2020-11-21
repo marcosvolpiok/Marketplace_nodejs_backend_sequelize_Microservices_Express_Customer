@@ -6,6 +6,7 @@ router.get('/servers/', serverController.list);
 router.post('/servers/add/', serverController.add);
 
 router.get('/messages/', messageController.list);
+router.get('/messagesByServer/:id', messageController.listByServer);
 
 
 module.exports = router;
