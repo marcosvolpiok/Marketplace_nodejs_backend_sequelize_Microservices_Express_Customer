@@ -3,7 +3,7 @@ const Server = require('../models/server');
 const moment = require('moment');
 
 controller.list = (req, res) => {
-    Server.findAll({ attributes: ['id', 'name'] })
+    Server.findAll({ attributes: ['id', 'server', 'description', 'server_type', 'created_at'] })
     .then(servers => {
       res.json(servers)
     })
