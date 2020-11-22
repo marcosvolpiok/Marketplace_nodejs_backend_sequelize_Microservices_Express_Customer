@@ -1,9 +1,8 @@
 const sequelize = require('../mysql');
-const server = require('./server');
 
 const Message = sequelize.define('messages', {
-    id: {type: Sequelize.SMALLINT, primaryKey: true, autoIncrement: true},
-    message: Sequelize.STRING,
+    id: {type: Sequelize.SMALLINT, primaryKey: true, autoIncrement: true, allowNull: false},
+    message: {type: Sequelize.STRING, allowNull: false},
     id_server: {
         type: Sequelize.INTEGER,
         allowNull: false,

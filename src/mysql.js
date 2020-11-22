@@ -2,6 +2,9 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('servers_meli', 'root', 'root', {
   host: 'localhost',
   dialect: 'mysql',
+  define:{
+    timestamps: false
+  }
 });
 
 sequelize.authenticate()
