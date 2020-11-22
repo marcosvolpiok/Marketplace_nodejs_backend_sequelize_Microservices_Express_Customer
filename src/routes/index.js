@@ -8,6 +8,7 @@ router.post('/servers/add/', serverController.add);
 router.get('/messages/', messageController.list);
 router.get('/messagesByServer/:id', messageController.listByServer);
 router.get('/messages/static', messageController.static);
+router.post('/messageByMessage', messageController.listByMessage);
 
 
 module.exports = router;
