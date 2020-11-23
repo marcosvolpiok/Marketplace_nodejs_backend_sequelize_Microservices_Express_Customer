@@ -23,20 +23,10 @@ module.exports = {
       server_type: {
         allowNull: false,
         type: Sequelize.STRING
-      }
-      /*,
+      },
       created_at: {
         type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
-      */
     });
   },
   down: async (queryInterface, Sequelize) => {
