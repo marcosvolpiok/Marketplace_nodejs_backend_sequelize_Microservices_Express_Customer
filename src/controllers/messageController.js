@@ -1,6 +1,5 @@
 const controller = {};
 const {Message, Server, Sequelize, sequelize} = require('../models');
-//const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 controller.list = async (req, res) => { 
