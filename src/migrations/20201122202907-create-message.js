@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
       message: {
         allowNull: false,
         type: Sequelize.STRING
@@ -19,17 +15,7 @@ module.exports = {
       id_server: {
         allowNull: false,
         type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      /*
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
-      */
     });
   },
   down: async (queryInterface, Sequelize) => {
