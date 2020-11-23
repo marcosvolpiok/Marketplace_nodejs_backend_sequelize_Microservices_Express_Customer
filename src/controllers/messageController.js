@@ -1,17 +1,11 @@
 const controller = {};
-const Message = require('../models/message');
-const Server = require('../models/server');
-const sequelize = require('../mysql');
-const Sequelize = require('sequelize');
+const {Message, Server, Sequelize, sequelize} = require('../models');
+//const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-Message.belongsTo(Server, {
-  foreignKey: 'id_server',
-  targetKey: 'id'
-});
-
-controller.list = async (req, res) => {  
-    Message.findAll({ attributes: ['id', 'message'], include: [
+controller.list = async (req, res) => { 
+  console.log('message', Message.id); 
+  Message.findAll({ attributes: ['id', 'message'], include: [
     { model: Server, as: 'server' },
   ] })
 
@@ -67,7 +61,7 @@ controller.static = async (req, res) => {
   Message.findAll({
     attributes: {
       include: [
-        [sequelize.literal('(select count(`m`.`id`) from  `messages` as m where m.id_server=messages.id_server)'), 'count'],
+        [sequelize.literal('(select count(`m`.`id`) from  `messages` as m where m.id_server=Message.id_server)'), 'count'],
         
      ]
     },

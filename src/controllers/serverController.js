@@ -1,5 +1,7 @@
 const controller = {};
-const Server = require('../models/server');
+//const Server = require('../models/server');
+const {Server} = require('../models');
+
 const moment = require('moment');
 
 controller.list = (req, res) => {
