@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Server.init({
     id: {type: DataTypes.SMALLINT, primaryKey: true, autoIncrement: true, allowNull: false},
-    server: DataTypes.STRING,
-    description: DataTypes.INTEGER,
-    server_type: DataTypes.STRING,
-    created_at: DataTypes.DATE
+    server: {type: DataTypes.STRING, allowNull: false,},
+    description: {type: DataTypes.INTEGER, allowNull: false},
+    server_type: {type: DataTypes.STRING, allowNull: false},
+    created_at: {type: DataTypes.DATE, allowNull: false}
   }, {
     sequelize,
     modelName: 'Server',

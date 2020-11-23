@@ -9,17 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       server: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       description: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       server_type: {
+        allowNull: false,
         type: Sequelize.STRING
-      },
+      }
+      /*,
       created_at: {
         type: Sequelize.DATE
       },
@@ -31,6 +36,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+      */
     });
   },
   down: async (queryInterface, Sequelize) => {
