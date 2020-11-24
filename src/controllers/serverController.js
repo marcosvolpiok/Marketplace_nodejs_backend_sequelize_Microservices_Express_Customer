@@ -1,22 +1,19 @@
 const controller = {};
-//const Server = require('../models/server');
 const {Server} = require('../models');
-
 const moment = require('moment');
+const serverRepository = require('../repository/serverRepository');
 
-controller.list = (req, res) => {
-    Server.findAll({ attributes: ['id', 'server', 'description', 'server_type', 'created_at'] })
-    .then(servers => {
-      res.json(servers)
-    })
-    .catch(err => {
-        res.send({error: err.message});
-    })
+
+controller.list = async (req, res) => {
+    const serverRepositoryOb=new serverRepository();
+    const servers=await serverRepositoryOb.list();
+    res.json(servers);
 }
 
 controller.add = async (req, res) => {
-    const server = await Server.create(req.body);
-    res.send(server);
+    const serverRepositoryOb=new serverRepository();
+    const server=await serverRepositoryOb.add(req.body);
+    res.json(server);
 }
 
 module.exports = controller;
