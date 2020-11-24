@@ -6,13 +6,21 @@ const serverRepositoryOb=new serverRepository();
 
 
 controller.list = async (req, res) => {
-    const servers=await serverRepositoryOb.list();
-    res.json(servers);
+    try{
+        const servers=await serverRepositoryOb.list();
+        res.json(servers);
+    }catch(e){
+        res.status(500).json({message: e.message})
+    }
 }
 
 controller.add = async (req, res) => {
-    const server=await serverRepositoryOb.add(req.body);
-    res.json(server);
+    try{
+        const server=await serverRepositoryOb.add(req.body);
+        res.json(server);
+    }catch(e){
+        res.status(500).json({message: e.message})
+    }
 }
 
 module.exports = controller;
