@@ -3,8 +3,7 @@ const express = require('express'),
     app = express(),
     bodyParser = require('body-parser');
     cors = require('cors');
-    //Sequelize = require('sequelize');
-//try{
+
 // importing routes
 const indexRoutes = require('./routes/index');
 
@@ -24,12 +23,13 @@ app.use(morgan('dev'));
 // routes
 app.use('/', indexRoutes);
 
+// error handler
+app.use(function(err, req, res, next){
+    res.status(400).json({error: err, message: err.message});
+});
+
 
 // starting the server
 app.listen(app.get('port'), () => {
     console.log(`server on port ${app.get('port')}`);
 });
-/*
-}catch(e){
-    console.log(`Exeption in server: ${e.message}`);
-}*/

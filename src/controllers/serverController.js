@@ -15,9 +15,7 @@ controller.list = (req, res) => {
 }
 
 controller.add = async (req, res) => {
-    let params=req.body;
-    params.created_at=moment(moment(req.body.created_at, 'hh-mm-ss-DD-MM-YYYY')).format('YYYY-MM-DD hh:mm:ss');
-    const server = await Server.create(params);
+    const server = await Server.create(req.body);
     res.send(server);
 }
 
