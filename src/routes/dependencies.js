@@ -16,5 +16,5 @@ const messageServiceOb=new messageService(messageRepositoryOb);
 const messageControllerOb = new messageController(messageServiceOb);
 
 module.exports = {
-    Message, Server, Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb
 };
