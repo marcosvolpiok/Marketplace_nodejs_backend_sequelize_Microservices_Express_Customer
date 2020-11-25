@@ -1,9 +1,6 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-/*
-const {Message, Server, Sequelize, sequelize} = require('../models');
-const Op = Sequelize.Op;
-*/
+
 class messageRepository extends Interface(baseRepository) {
     constructor(Message, Server, Sequelize, sequelize) {
         super();

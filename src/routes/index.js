@@ -1,18 +1,11 @@
 const router = require('express').Router();
 const Joi = require('joi');
 const moment = require('moment');
-const serverController = require('../controllers/serverController');
-const messageController = require('../controllers/messageController');
-const serverRepository = require('../repository/serverRepository');
-const messageRepository = require('../repository/messageRepository');
-
-const {Message, Server, Sequelize, sequelize} = require('../models');
-const serverRepositoryOb=new serverRepository(Server);
-const serverControllerOb = new serverController(serverRepositoryOb);
-
-const messageRepositoryOb=new messageRepository(Message, Server, Sequelize, sequelize);
-const messageControllerOb = new messageController(messageRepositoryOb);
-
+const {
+    serverRepositoryOb,
+    serverControllerOb,
+    messageControllerOb
+} = require('./dependencies');
 
 router.get('/servers/', serverControllerOb.list);
 router.post('/servers/add/', addServerSchema, serverControllerOb.add);
@@ -30,10 +23,7 @@ function listByServer(req, res, next){
     validateRequest(req, next, schema);
 }
 
-async function addServerSchema(req, res, next) {
-    console.log('xxxxxxxxxxx');
-    const list = await messageRepositoryOb.list();
-    
+async function addServerSchema(req, res, next) {   
     let params=req;
     params.body.created_at=moment(moment(req.body.created_at, 'hh-mm-ss-DD-MM-YYYY')).format('YYYY-MM-DD hh:mm:ss');
     let arrServers=[];
