@@ -1,6 +1,5 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-//const {Server} = require('../models');
 
 class serverRepository extends Interface(baseRepository) {
     constructor(Server) {
