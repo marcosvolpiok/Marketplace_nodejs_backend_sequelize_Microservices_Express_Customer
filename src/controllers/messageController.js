@@ -1,11 +1,11 @@
 class messageController{
-  constructor(messageRepository) {
-    this.messageRepository=messageRepository;
+  constructor(messageService) {
+    this.messageService=messageService;
   }
 
   list = async (req, res) => { 
     try{
-      const messages=await this.messageRepository.list();
+      const messages=await this.messageService.list();
       res.json(messages);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -14,7 +14,7 @@ class messageController{
 
   listByServer = async (req, res) => {  
     try{
-      const messages=await this.messageRepository.listByServer(req.params.id);
+      const messages=await this.messageService.listByServer(req.params.id);
       res.json(messages);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -23,7 +23,7 @@ class messageController{
 
   listByMessage = async (req, res) => {  
     try{
-      const messages=await this.messageRepository.listByMessage(req.body.message);
+      const messages=await this.messageService.listByMessage(req.body.message);
       res.json(messages);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -31,7 +31,7 @@ class messageController{
   }
 
   static = async (req, res) => {  
-    const messages=await this.messageRepository.static();
+    const messages=await this.messageService.static();
     res.json(messages);
   }
 }
