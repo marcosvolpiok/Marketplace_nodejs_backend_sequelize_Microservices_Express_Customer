@@ -1,8 +1,5 @@
 const chai = require('chai');
 const expect = chai.expect;
-//const mockery = require('mockery');
-//const sinon = require('sinon');
-//const jest = require('jest');
 const serverRepository = require('../repository/serverRepository');
 const SequelizeMock = require('sequelize-mock');
 
