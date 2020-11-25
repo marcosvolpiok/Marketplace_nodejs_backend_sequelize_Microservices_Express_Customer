@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Server',
-    timestamps: false
+    timestamps: false,
+    autoQueryFallback: true
   });
   return Server;
 };

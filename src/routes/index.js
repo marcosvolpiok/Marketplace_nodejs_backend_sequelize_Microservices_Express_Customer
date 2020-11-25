@@ -3,15 +3,24 @@ const Joi = require('joi');
 const moment = require('moment');
 const serverController = require('../controllers/serverController');
 const messageController = require('../controllers/messageController');
-const {Server} = require('../models');
+const serverRepository = require('../repository/serverRepository');
+const messageRepository = require('../repository/messageRepository');
 
-router.get('/servers/', serverController.list);
-router.post('/servers/add/', addServerSchema, serverController.add);
+const {Message, Server, Sequelize, sequelize} = require('../models');
+const serverRepositoryOb=new serverRepository(Server);
+const serverControllerOb = new serverController(serverRepositoryOb);
 
-router.get('/messages/', messageController.list);
-router.get('/messagesByServer/:id', listByServer, messageController.listByServer);
-router.get('/messages/static', messageController.static);
-router.post('/messageByMessage', messageController.listByMessage);
+const messageRepositoryOb=new messageRepository(Message, Server, Sequelize, sequelize);
+const messageControllerOb = new messageController(messageRepositoryOb);
+
+
+router.get('/servers/', serverControllerOb.list);
+router.post('/servers/add/', addServerSchema, serverControllerOb.add);
+
+router.get('/messages/', messageControllerOb.list);
+router.get('/messagesByServer/:id', listByServer, messageControllerOb.listByServer);
+router.get('/messages/static', messageControllerOb.static);
+router.post('/messageByMessage', messageControllerOb.listByMessage);
 
 
 function listByServer(req, res, next){
@@ -22,11 +31,14 @@ function listByServer(req, res, next){
 }
 
 async function addServerSchema(req, res, next) {
+    console.log('xxxxxxxxxxx');
+    const list = await messageRepositoryOb.list();
+    
     let params=req;
     params.body.created_at=moment(moment(req.body.created_at, 'hh-mm-ss-DD-MM-YYYY')).format('YYYY-MM-DD hh:mm:ss');
     let arrServers=[];
 
-    let servers = await Server.findAll({ attributes: ['server'] });
+    let servers = await serverRepositoryOb.list();
     servers.forEach((s)=>{
         arrServers.push(s.server);
     });
@@ -41,6 +53,7 @@ async function addServerSchema(req, res, next) {
         created_at: Joi.date().required()
     });
     validateRequest(params, next, schema);
+    
 }
 
 
