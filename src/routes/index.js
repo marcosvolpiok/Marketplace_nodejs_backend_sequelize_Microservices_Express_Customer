@@ -5,7 +5,7 @@ const {
     serverRepositoryOb,
     serverControllerOb,
     messageControllerOb
-} = require('./dependencies');
+} = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
 router.post('/servers/add/', addServerSchema, serverControllerOb.add);

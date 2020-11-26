@@ -4,7 +4,7 @@ const messageRepository = require('../repository/messageRepository');
 const SequelizeMock = require('sequelize-mock');
 const {
     Sequelize, sequelize
-} = require('../routes/dependencies');
+} = require('../dependencies/');
 
 
 const DBConnectionMock = new SequelizeMock();
