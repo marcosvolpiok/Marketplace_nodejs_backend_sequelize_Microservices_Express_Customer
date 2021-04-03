@@ -4,7 +4,9 @@ const moment = require('moment');
 const {
     serverRepositoryOb,
     serverControllerOb,
-    messageControllerOb
+    messageControllerOb,
+    shopControllerOb,
+    shopCatalogControllerOb
 } = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
@@ -14,6 +16,11 @@ router.get('/messages/', messageControllerOb.list);
 router.get('/messagesByServer/:id', listByServer, messageControllerOb.listByServer);
 router.get('/messages/static', messageControllerOb.static);
 router.post('/messageByMessage', messageControllerOb.listByMessage);
+
+router.get('/shops/', shopControllerOb.list);
+
+router.get('/shops/catalog', shopCatalogControllerOb.list);
+router.get('/shops/catalog/detail', shopCatalogControllerOb.detail);
 
 
 function listByServer(req, res, next){

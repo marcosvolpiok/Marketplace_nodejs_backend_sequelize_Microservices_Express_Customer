@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
-    "database": "servers_meli",
+    "password": "1234",
+    "database": "todotex",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
