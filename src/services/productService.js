@@ -8,6 +8,12 @@ class productService {
           
           return product;
       }
+
+      listById = async (req, res) => {
+        const product=await this.productRepository.listById(req.params.id);
+        
+        return product;
+    }
 }
 
 module.exports = productService;

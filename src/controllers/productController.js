@@ -35,7 +35,8 @@ class productController{
     
   }
 
-  detail = async (req, res) => { 
+  listById = async (req, res) => { 
+    /*
     res.json(
         {
             'id_shop': 4444,
@@ -48,14 +49,13 @@ class productController{
             ]
         }
         );
-    /*
-    try{
-      const messages=await this.messageService.list();
-      res.json(messages);
-    }catch(e){
-      res.status(500).json({message: e.message})
-    }
-    */
+        */
+        try{
+          const product=await this.productService.listById(req, res);
+          res.json(product);
+        }catch(e){
+          res.status(500).json({message: e.message})
+        }
   }
 }
 

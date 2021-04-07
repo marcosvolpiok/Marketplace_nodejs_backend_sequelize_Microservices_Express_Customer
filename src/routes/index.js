@@ -20,7 +20,7 @@ router.post('/messageByMessage', messageControllerOb.listByMessage);
 router.get('/shops/', shopControllerOb.list);
 
 router.get('/shops/catalog', productControllerOb.list);
-router.get('/shops/catalog/detail', productControllerOb.detail);
+router.get('/shops/catalog/detail/:id', productControllerOb.listById);
 
 
 function listByServer(req, res, next){

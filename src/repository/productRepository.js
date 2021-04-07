@@ -17,6 +17,12 @@ class productRepository extends Interface(baseRepository) {
         return product;
     }
 
+    async listById (id) {
+        const product = await this.Product.findByPk(id);
+
+        return product;
+    }
+
     async add (params) {
     }
 
