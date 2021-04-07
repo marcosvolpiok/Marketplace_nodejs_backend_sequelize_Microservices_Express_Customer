@@ -41,8 +41,8 @@ class shopController{
             'detail': 'Jean elastizado clásico, corte chino de Denim',
             'id': 1234,
             'images': [
-                'https://netivooregon.s3.amazonaws.com/attach/modelo/20210402/2000/76201894.jpg',
-                'https://netivooregon.s3.amazonaws.com/attach/modelo/20210402/2000/85063480.jpg'
+                {id: 1, image: 'https://netivooregon.s3.amazonaws.com/attach/modelo/20210402/2000/76201894.jpg'},
+                {id: 2, image: 'https://netivooregon.s3.amazonaws.com/attach/modelo/20210402/2000/85063480.jpg'}
             ]
         }
         );
