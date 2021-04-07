@@ -1,19 +1,21 @@
 const serverController = require('../controllers/serverController');
 const messageController = require('../controllers/messageController');
 const shopController = require('../controllers/shopController');
-const shopCatalogController = require('../controllers/shopCatalogController');
+const productController = require('../controllers/productController');
 
 
 const serverRepository = require('../repository/serverRepository');
 const messageRepository = require('../repository/messageRepository');
 const shopRepository = require('../repository/shopRepository');
+const productRepository = require('../repository/productRepository');
 
 const serverService = require('../services/serverService');
 const messageService = require('../services/messageService');
 const shopService = require('../services/shopService');
+const productService = require('../services/productService');
 
 
-const {Message, Server, Shop, Sequelize, sequelize} = require('../models');
+const {Message, Server, Shop, Product, Sequelize, sequelize} = require('../models');
 const serverRepositoryOb=new serverRepository(Server);
 const serverServiceOb = new serverService(serverRepositoryOb);
 const serverControllerOb = new serverController(serverServiceOb);
@@ -27,8 +29,11 @@ const shopRepositoryOb=new shopRepository(Shop, Sequelize, sequelize);
 const shopServiceOb = new shopService(shopRepositoryOb);
 const shopControllerOb = new shopController(shopServiceOb);
 
-const shopCatalogControllerOb = new shopCatalogController(messageServiceOb);
+const productRepositoryOb=new productRepository(Product, Sequelize, sequelize);
+const productServiceOb = new productService(productRepositoryOb);
+const productControllerOb = new productController(productServiceOb);
+
 
 module.exports = {
-    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, shopCatalogControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb
 };

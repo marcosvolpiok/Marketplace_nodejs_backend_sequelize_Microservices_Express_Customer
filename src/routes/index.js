@@ -6,7 +6,7 @@ const {
     serverControllerOb,
     messageControllerOb,
     shopControllerOb,
-    shopCatalogControllerOb
+    productControllerOb
 } = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
@@ -19,8 +19,8 @@ router.post('/messageByMessage', messageControllerOb.listByMessage);
 
 router.get('/shops/', shopControllerOb.list);
 
-router.get('/shops/catalog', shopCatalogControllerOb.list);
-router.get('/shops/catalog/detail', shopCatalogControllerOb.detail);
+router.get('/shops/catalog', productControllerOb.list);
+router.get('/shops/catalog/detail', productControllerOb.detail);
 
 
 function listByServer(req, res, next){
