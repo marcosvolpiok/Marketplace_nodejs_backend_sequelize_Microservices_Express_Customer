@@ -2,9 +2,10 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class productRepository extends Interface(baseRepository) {
-    constructor(Product, Sequelize, sequelize) {
+    constructor(Product, Image, Sequelize, sequelize) {
         super();
         this.Product=Product;
+        this.Image=Image;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
@@ -12,7 +13,11 @@ class productRepository extends Interface(baseRepository) {
     }
 
     async list () {
-        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'] });
+        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
+        include: [
+            { model: this.Image, as: 'image' }
+        ]
+             });
 
         return product;
     }
