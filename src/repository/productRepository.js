@@ -22,8 +22,28 @@ class productRepository extends Interface(baseRepository) {
         return product;
     }
 
+    async listByShop (idShop) {
+        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
+        where: {
+            id_shop: idShop
+        },
+        include: [
+            { model: this.Image, as: 'image' }
+        ]
+             });
+
+        return product;
+    }
+
     async listById (id) {
-        const product = await this.Product.findByPk(id);
+        const product = await this.Product.findOne({
+            where:{
+                id: id
+            },
+            include: [
+            { model: this.Image, as: 'image' }
+        ]
+        });
 
         return product;
     }

@@ -20,6 +20,7 @@ router.post('/messageByMessage', messageControllerOb.listByMessage);
 router.get('/shops/', shopControllerOb.list);
 
 router.get('/shops/catalog', productControllerOb.list);
+router.get('/shops/catalog/:id', productControllerOb.listByShop);
 router.get('/shops/catalog/detail/:id', productControllerOb.listById);
 
 

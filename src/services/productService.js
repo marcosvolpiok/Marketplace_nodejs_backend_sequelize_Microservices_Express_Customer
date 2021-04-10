@@ -14,6 +14,12 @@ class productService {
         
         return product;
     }
+
+    listByShop = async (req, res) => {
+        const product=await this.productRepository.listByShop(req.params.id);
+        
+        return product;
+    }
 }
 
 module.exports = productService;
