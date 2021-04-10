@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
         Cart.hasOne(models.Shop, {
         foreignKey: 'id',
-        targetKey: 'id',
+        targetKey: 'id_shop',
         as: 'shop'
       });
     }
