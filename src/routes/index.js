@@ -6,7 +6,8 @@ const {
     serverControllerOb,
     messageControllerOb,
     shopControllerOb,
-    productControllerOb
+    productControllerOb,
+    cartControllerOb
 } = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
@@ -22,6 +23,11 @@ router.get('/shops/', shopControllerOb.list);
 router.get('/shops/catalog', productControllerOb.list);
 router.get('/shops/catalog/:id', productControllerOb.listByShop);
 router.get('/shops/catalog/detail/:id', productControllerOb.listById);
+
+router.get('/cart/', cartControllerOb.list);
+router.get('/cart/user/:idCustomer', cartControllerOb.listByIdUser);
+router.get('/cart/user/:idCustomer/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
+
 
 
 function listByServer(req, res, next){
