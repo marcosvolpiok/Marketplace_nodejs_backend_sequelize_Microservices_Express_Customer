@@ -3,6 +3,8 @@ const messageController = require('../controllers/messageController');
 const shopController = require('../controllers/shopController');
 const productController = require('../controllers/productController');
 const cartController = require('../controllers/cartController');
+const cartProductController = require('../controllers/cartProductController');
+
 
 
 const serverRepository = require('../repository/serverRepository');
@@ -10,6 +12,7 @@ const messageRepository = require('../repository/messageRepository');
 const shopRepository = require('../repository/shopRepository');
 const productRepository = require('../repository/productRepository');
 const cartRepository = require('../repository/cartRepository');
+const cartProductRepository = require('../repository/cartProductRepository');
 
 
 const serverService = require('../services/serverService');
@@ -17,9 +20,11 @@ const messageService = require('../services/messageService');
 const shopService = require('../services/shopService');
 const productService = require('../services/productService');
 const cartService = require('../services/cartService');
+const cartProductService = require('../services/cartProductService');
 
 
-const {Message, Server, Shop, Product, Image, Cart, Sequelize, sequelize} = require('../models');
+
+const {Message, Server, Shop, Product, Image, Cart, CartProduct, Sequelize, sequelize} = require('../models');
 
 const serverRepositoryOb=new serverRepository(Server);
 const serverServiceOb = new serverService(serverRepositoryOb);
@@ -42,6 +47,10 @@ const cartRepositoryOb=new cartRepository(Cart, Shop, Sequelize, sequelize);
 const cartServiceOb = new cartService(cartRepositoryOb);
 const cartControllerOb = new cartController(cartServiceOb);
 
+const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop, Sequelize, sequelize);
+const cartProductServiceOb = new cartProductService(cartProductRepositoryOb);
+const cartProductControllerOb = new cartProductController(cartProductServiceOb);
+
 module.exports = {
-    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb
 };
