@@ -7,7 +7,8 @@ const express = require('express'),
 // importing routes
 const indexRoutes = require('./routes/index');
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
+app.use(express.json());
 
 
 // settings
