@@ -32,7 +32,7 @@ class cartRepository extends Interface(baseRepository) {
     }
 
     async listByIdUserAndIdShop (idCustomer, idShop) {
-        const cart = await this.Cart.findAll({ attributes: ['id', 'id_shop'],
+        const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
             id_customer: idCustomer,
             id_shop: idShop
