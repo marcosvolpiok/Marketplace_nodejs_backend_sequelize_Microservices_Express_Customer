@@ -42,6 +42,7 @@ class cartProductRepository extends Interface(baseRepository) {
         }
         });
 
+        //Check if cart exists
         if (cart) {
             cartId = cart.id;
         } else {
@@ -53,14 +54,21 @@ class cartProductRepository extends Interface(baseRepository) {
             cartId = cartNew.id;
         }
 
-        const cartProduct = await this.CartProduct.create({
+        //Check if cartProduct exits
+        const cartProduct = await this.CartProduct.findOne({
             id_cart: cartId,
             id_product: params.idProduct
         });
+        if(cartProduct){
+            return {state: 'OBJECT_EXISTS', message: 'The product exists in the cart'}
+        } else {
+            const cartProductNew = await this.CartProduct.create({
+                id_cart: cartId,
+                id_product: params.idProduct
+            });
 
-        console.log('ID DE CARRO: ', cartId);
-
-        return {cartProduct};
+            return cartProductNew;
+        }
     }
 
     update (params) {
@@ -79,7 +87,7 @@ class cartProductRepository extends Interface(baseRepository) {
 
             return cartProductDestroy;
         } else {
-            return {state: 'OBJECT_NO_FOUND', message: 'Objeto no encontrado'};
+            return {state: 'OBJECT_NO_FOUND', message: 'Object doesnt found'};
         }
     }
 }
