@@ -34,6 +34,15 @@ class cartProductController{
       res.status(500).json({message: e.message})
     }    
   }
+
+  update = async (req, res) => { 
+    try{
+      const cart=await this.cartProductService.update(req);
+      res.json(cart);
+    }catch(e){
+      res.status(500).json({message: e.message})
+    }    
+  }
 }
 
 

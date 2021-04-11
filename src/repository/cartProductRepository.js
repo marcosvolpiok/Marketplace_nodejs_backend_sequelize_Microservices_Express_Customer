@@ -48,7 +48,8 @@ class cartProductRepository extends Interface(baseRepository) {
         } else {
             const cartNew = await this.Cart.create({
                 id_shop: params.idShop,
-                id_customer: params.idCustomer
+                id_customer: params.idCustomer,
+                quantity: params.quantity
             });
 
             cartId = cartNew.id;
@@ -64,14 +65,26 @@ class cartProductRepository extends Interface(baseRepository) {
         } else {
             const cartProductNew = await this.CartProduct.create({
                 id_cart: cartId,
-                id_product: params.idProduct
+                id_product: params.idProduct,
+                quantity: params.quantity
             });
 
             return cartProductNew;
         }
     }
 
-    update (params) {
+    async update (params) {
+        const cartProduct = await this.CartProduct.findByPk(params.id);
+        if(params.quantity == 0){
+            const destroy = await cartProduct.destroy();
+
+            return destroy;
+        }else{
+            cartProduct.quantity = params.quantity;
+            const update = await cartProduct.save();
+
+            return update;
+        }
     }
 
     async delete (params) {

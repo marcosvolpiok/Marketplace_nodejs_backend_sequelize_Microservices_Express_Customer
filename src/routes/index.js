@@ -30,8 +30,9 @@ router.get('/cart/user/:idCustomer', cartControllerOb.listByIdUser);
 router.get('/cart/user/:idCustomer/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
 
 router.get('/cart/:idCart', cartProductControllerOb.listById);
-router.post('/cart/', cartProductControllerOb.add);
+router.put('/cart/', cartProductControllerOb.add);
 router.delete('/cart/product/', cartProductControllerOb.delete);
+router.patch('/cart/product/', cartProductControllerOb.update);
 
 
 function listByServer(req, res, next){
