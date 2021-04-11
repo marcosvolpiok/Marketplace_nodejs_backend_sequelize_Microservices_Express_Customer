@@ -66,7 +66,21 @@ class cartProductRepository extends Interface(baseRepository) {
     update (params) {
     }
 
-    delete (params) {
+    async delete (params) {
+        const cartProduct = await this.CartProduct.findOne({ attributes: ['id'],
+            where: {
+                id_cart: params.idCart,
+                id_product: params.idProduct,
+            }
+        });
+
+        if(cartProduct){
+            const cartProductDestroy = await cartProduct.destroy();
+
+            return cartProductDestroy;
+        } else {
+            return {state: 'OBJECT_NO_FOUND', message: 'Objeto no encontrado'};
+        }
     }
 }
 

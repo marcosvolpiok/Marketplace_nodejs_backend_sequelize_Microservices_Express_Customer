@@ -31,6 +31,7 @@ router.get('/cart/user/:idCustomer/shop/:idShop', cartControllerOb.listByIdUserA
 
 router.get('/cart/:idCart', cartProductControllerOb.listById);
 router.post('/cart/', cartProductControllerOb.add);
+router.delete('/cart/product/', cartProductControllerOb.delete);
 
 
 function listByServer(req, res, next){

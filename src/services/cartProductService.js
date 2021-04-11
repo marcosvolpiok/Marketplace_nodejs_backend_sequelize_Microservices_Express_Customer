@@ -14,6 +14,12 @@ class cartProductService {
         
         return cart;
     }
+
+    delete = async (req, res) => {
+        const cart=await this.cartProductRepository.delete({idCustomer: req.body.idCustomer, idCart: req.body.idCart, idProduct: req.body.idProduct});
+        
+        return cart;
+    }
 }
 
 module.exports = cartProductService;

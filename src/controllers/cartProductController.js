@@ -27,7 +27,12 @@ class cartProductController{
   }
 
   delete = async (req, res) => { 
-    
+    try{
+      const cart=await this.cartProductService.delete(req);
+      res.json(cart);
+    }catch(e){
+      res.status(500).json({message: e.message})
+    }    
   }
 }
 
