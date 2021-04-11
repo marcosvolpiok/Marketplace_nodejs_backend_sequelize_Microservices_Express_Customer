@@ -9,6 +9,11 @@ class cartProductService {
           return cart;
       }
 
+      add = async (req, res) => {
+        const cart=await this.cartProductRepository.add({idCustomer: req.body.idCustomer, idShop: req.body.idShop});
+        
+        return cart;
+    }
 }
 
 module.exports = cartProductService;

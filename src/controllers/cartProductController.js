@@ -12,19 +12,23 @@ class cartProductController{
       res.status(500).json({message: e.message})
     }
   }
-
    
-    add = async (req, res) => { 
-
+  add = async (req, res) => { 
+    try{
+      const cart=await this.cartProductService.add(req);
+      res.json(cart);
+    }catch(e){
+      res.status(500).json({message: e.message})
     }
+  }
 
-    update = async (req, res) => { 
+  update = async (req, res) => { 
     
-    }
+  }
 
-    delete = async (req, res) => { 
+  delete = async (req, res) => { 
     
-    }
+  }
 }
 
 

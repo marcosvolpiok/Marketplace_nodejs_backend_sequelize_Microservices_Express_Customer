@@ -31,6 +31,31 @@ class cartProductRepository extends Interface(baseRepository) {
     }
 
     async add (params) {
+        let cartId;
+
+        //Searches if exists cart active with this user
+        const cart = await this.Cart.findOne({ attributes: ['id'],
+        where: {
+            id_customer: params.idCustomer,
+            id_shop: params.idShop,
+            state: 0
+        }
+        });
+
+        if (cart) {
+            cartId = cart.id;
+        } else {
+            const cartNew = await this.Cart.create({
+                id_shop: params.idShop,
+                id_customer: params.idCustomer
+            });
+
+            cartId = cartNew.id;
+        }
+
+        console.log('ID DE CARRO: ', cartId);
+
+        return {'cart_id': cartId};
     }
 
     update (params) {
