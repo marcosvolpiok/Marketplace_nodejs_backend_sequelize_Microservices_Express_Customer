@@ -16,6 +16,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      state: {
+        defaultValue: 0,
+        type: Sequelize.SMALLINT,
+        comment: '0: active, 1: inactive'
+      },
       updated_at: {
         type: Sequelize.DATE
       },

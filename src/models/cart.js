@@ -18,11 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Cart.init({
-    id: {type: DataTypes.SMALLINT, primaryKey: true, autoIncrement: true, allowNull: false},
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     id_shop: {type: DataTypes.INTEGER, allowNull: false,},
     id_customer: {type: DataTypes.INTEGER, allowNull: false,},
     updated_at: {type: DataTypes.STRING, allowNull: true},
-    created_at: {type: DataTypes.DATE, allowNull: false}
+    created_at: {type: DataTypes.DATE, allowNull: false},
+    state: {type: DataTypes.SMALLINT, primaryKey: true, autoIncrement: true, allowNull: false}
   }, {
     sequelize,
     modelName: 'Cart',
