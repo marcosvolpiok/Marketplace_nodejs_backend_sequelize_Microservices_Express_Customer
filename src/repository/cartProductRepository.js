@@ -53,9 +53,14 @@ class cartProductRepository extends Interface(baseRepository) {
             cartId = cartNew.id;
         }
 
+        const cartProduct = await this.CartProduct.create({
+            id_cart: cartId,
+            id_product: params.idProduct
+        });
+
         console.log('ID DE CARRO: ', cartId);
 
-        return {'cart_id': cartId};
+        return {cartProduct};
     }
 
     update (params) {

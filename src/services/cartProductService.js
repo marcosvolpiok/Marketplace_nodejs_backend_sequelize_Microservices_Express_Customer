@@ -10,7 +10,7 @@ class cartProductService {
       }
 
       add = async (req, res) => {
-        const cart=await this.cartProductRepository.add({idCustomer: req.body.idCustomer, idShop: req.body.idShop});
+        const cart=await this.cartProductRepository.add({idCustomer: req.body.idCustomer, idShop: req.body.idShop, idProduct: req.body.idProduct});
         
         return cart;
     }
