@@ -14,7 +14,7 @@ class cartProductRepository extends Interface(baseRepository) {
     }
 
     async listById (idCart) {
-        const cart = await this.CartProduct.findAll({ attributes: ['id', 'id_cart', 'id_product'],
+        const cart = await this.CartProduct.findAll({ attributes: ['id', 'id_cart', 'id_product', 'quantity'],
         where: {
             id_cart: idCart 
         },
