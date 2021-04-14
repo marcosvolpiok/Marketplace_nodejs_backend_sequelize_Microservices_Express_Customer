@@ -61,7 +61,14 @@ class cartProductRepository extends Interface(baseRepository) {
             id_product: params.idProduct
         });
         if(cartProduct){
-            return {state: 'OBJECT_EXISTS', message: 'The product exists in the cart'}
+            return {
+                state: 'OBJECT_EXISTS',
+                message: 'The product exists in the cart',
+                detail: {
+                    id: cartProduct.id,
+                    id_cart: cartId
+                }
+            };
         } else {
             const cartProductNew = await this.CartProduct.create({
                 id_cart: cartId,
