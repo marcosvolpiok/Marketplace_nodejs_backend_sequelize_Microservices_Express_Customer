@@ -57,9 +57,12 @@ class cartProductRepository extends Interface(baseRepository) {
 
         //Check if cartProduct exits
         const cartProduct = await this.CartProduct.findOne({
-            id_cart: cartId,
-            id_product: params.idProduct
+            where: {
+                id_cart: cartId,
+                id_product: params.idProduct
+            }
         });
+
         if(cartProduct){
             return {
                 state: 'OBJECT_EXISTS',
