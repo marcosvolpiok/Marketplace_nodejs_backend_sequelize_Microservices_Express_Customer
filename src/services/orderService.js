@@ -37,7 +37,7 @@ class orderService {
                 });
             }
 
-            return {state: 'OK', detail: 'Tu pedido fue creado exitosamente'}
+            return {state: 'OK', detail: 'Tu pedido fue creado exitosamente', orderNew}
         } else {
             return {state: 'ERROR_CART_NOT_FOUND', detail: 'Tu pedido fue creado exitosamente'}
         }
