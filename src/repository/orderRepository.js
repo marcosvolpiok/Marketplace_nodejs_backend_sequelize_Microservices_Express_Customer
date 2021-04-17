@@ -14,7 +14,11 @@ class orderRepository extends Interface(baseRepository) {
     }
 
     async list () {
-        const order = await this.Order.findAll();
+        const order = await this.Order.findAll({
+            include: [
+                { model: this.Shop, as: 'shop' }
+            ]
+        });
 
         return order;
     }

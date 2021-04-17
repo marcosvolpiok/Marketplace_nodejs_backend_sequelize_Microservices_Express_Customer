@@ -9,6 +9,12 @@ class orderProductService {
           return orderProduct;
       }
 
+      listById = async (req, res) => {
+        const orderProduct=await this.orderProductRepository.listById(req.params.id);
+        
+        return orderProduct;
+    }
+
 }
 
 module.exports = orderProductService;

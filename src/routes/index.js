@@ -39,6 +39,8 @@ router.patch('/cart/product/', cartProductControllerOb.update);
 router.get('/order/', orderControllerOb.list);
 router.put('/order/', orderControllerOb.addFromCart);
 
+router.get('/order/product/:id', orderProductControllerOb.listById);
+
 
 function listByServer(req, res, next){
     const schema = Joi.object({

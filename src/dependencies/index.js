@@ -59,7 +59,7 @@ const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Sequelize
 const orderServiceOb = new orderService(orderRepositoryOb);
 const orderControllerOb = new orderController(orderServiceOb);
 
-const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
+const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Product, Shop, Sequelize, sequelize);
 const orderProductServiceOb = new orderProductService(orderProductRepositoryOb);
 const orderProductControllerOb = new orderProductController(orderProductServiceOb);
 
