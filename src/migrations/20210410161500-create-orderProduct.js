@@ -16,6 +16,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      quantity: {
+        allowNull: false,
+        type: Sequelize.SMALLINT
+      },
       updated_at: {
         type: Sequelize.DATE
       },
