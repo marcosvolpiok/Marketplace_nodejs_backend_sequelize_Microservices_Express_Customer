@@ -4,7 +4,8 @@ const shopController = require('../controllers/shopController');
 const productController = require('../controllers/productController');
 const cartController = require('../controllers/cartController');
 const cartProductController = require('../controllers/cartProductController');
-
+const orderController = require('../controllers/orderController');
+const orderProductController = require('../controllers/orderProductController');
 
 
 const serverRepository = require('../repository/serverRepository');
@@ -13,6 +14,8 @@ const shopRepository = require('../repository/shopRepository');
 const productRepository = require('../repository/productRepository');
 const cartRepository = require('../repository/cartRepository');
 const cartProductRepository = require('../repository/cartProductRepository');
+const orderRepository = require('../repository/orderRepository');
+const orderProductRepository = require('../repository/orderProductRepository');
 
 
 const serverService = require('../services/serverService');
@@ -21,15 +24,16 @@ const shopService = require('../services/shopService');
 const productService = require('../services/productService');
 const cartService = require('../services/cartService');
 const cartProductService = require('../services/cartProductService');
+const orderService = require('../services/orderService');
+const orderProductService = require('../services/orderProductService');
 
 
 
-const {Message, Server, Shop, Product, Image, Cart, CartProduct, Sequelize, sequelize} = require('../models');
+const {Message, Server, Shop, Product, Image, Cart, CartProduct, Order, OrderProduct, Sequelize, sequelize} = require('../models');
 
 const serverRepositoryOb=new serverRepository(Server);
 const serverServiceOb = new serverService(serverRepositoryOb);
 const serverControllerOb = new serverController(serverServiceOb);
-
 
 const messageRepositoryOb=new messageRepository(Message, Server, Sequelize, sequelize);
 const messageServiceOb=new messageService(messageRepositoryOb);
@@ -51,6 +55,15 @@ const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop,
 const cartProductServiceOb = new cartProductService(cartProductRepositoryOb);
 const cartProductControllerOb = new cartProductController(cartProductServiceOb);
 
+const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
+const orderServiceOb = new orderService(orderRepositoryOb);
+const orderControllerOb = new orderController(orderServiceOb);
+
+const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
+const orderProductServiceOb = new orderProductService(orderProductRepositoryOb);
+const orderProductControllerOb = new orderProductController(orderProductServiceOb);
+
+
 module.exports = {
-    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb
 };

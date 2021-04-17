@@ -8,7 +8,9 @@ const {
     shopControllerOb,
     productControllerOb,
     cartControllerOb,
-    cartProductControllerOb
+    cartProductControllerOb,
+    orderControllerOb,
+    orderProductControllerOb
 } = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
@@ -33,6 +35,9 @@ router.get('/cart/:idCart', cartProductControllerOb.listById);
 router.put('/cart/', cartProductControllerOb.add);
 router.delete('/cart/product/', cartProductControllerOb.delete);
 router.patch('/cart/product/', cartProductControllerOb.update);
+
+router.get('/order/', orderControllerOb.list);
+router.put('/order/', orderControllerOb.addFromCart);
 
 
 function listByServer(req, res, next){
