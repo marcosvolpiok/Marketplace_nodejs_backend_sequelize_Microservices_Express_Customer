@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   Order.init({
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     id_shop: {type: DataTypes.INTEGER, allowNull: false,},
+    id_customer: {type: DataTypes.INTEGER, allowNull: false,},
     id_cart: {type: DataTypes.INTEGER, allowNull: false,},
     id_state: {type: DataTypes.INTEGER, allowNull: true},
     updated_at: {type: DataTypes.STRING, allowNull: true},

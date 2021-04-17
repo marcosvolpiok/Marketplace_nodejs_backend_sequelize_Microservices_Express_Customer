@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      id_customer: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       id_cart: {
         allowNull: false,
         type: Sequelize.INTEGER
