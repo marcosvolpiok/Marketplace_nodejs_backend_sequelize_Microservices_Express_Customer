@@ -38,6 +38,7 @@ router.patch('/cart/product/', cartProductControllerOb.update);
 
 router.get('/order/', orderControllerOb.list);
 router.put('/order/', orderControllerOb.addFromCart);
+router.put('/order/byCart/', orderControllerOb.addFromCart);
 
 router.get('/order/product/:id', orderProductControllerOb.listById);
 

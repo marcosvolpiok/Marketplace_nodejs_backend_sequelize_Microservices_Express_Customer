@@ -14,9 +14,11 @@ class orderController{
 
   addFromCart = async (req, res) => { 
     try{
-
+      const order=await this.orderService.addFromCart(req);
+      res.json(order);
     }catch(e){
       res.status(500).json({message: e.message})
+      console.log(e)
     }
   }  
 }

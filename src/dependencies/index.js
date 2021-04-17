@@ -55,14 +55,13 @@ const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop,
 const cartProductServiceOb = new cartProductService(cartProductRepositoryOb);
 const cartProductControllerOb = new cartProductController(cartProductServiceOb);
 
-const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
-const orderServiceOb = new orderService(orderRepositoryOb);
-const orderControllerOb = new orderController(orderServiceOb);
-
 const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Product, Shop, Sequelize, sequelize);
 const orderProductServiceOb = new orderProductService(orderProductRepositoryOb);
 const orderProductControllerOb = new orderProductController(orderProductServiceOb);
 
+const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
+const orderServiceOb = new orderService(orderRepositoryOb, orderProductRepositoryOb, cartRepositoryOb, cartProductRepositoryOb);
+const orderControllerOb = new orderController(orderServiceOb);
 
 module.exports = {
     Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb

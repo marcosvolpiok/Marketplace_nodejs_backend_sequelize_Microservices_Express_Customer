@@ -45,6 +45,12 @@ class cartRepository extends Interface(baseRepository) {
         return cart;
     }
 
+    async listById (id) {
+        const cart = await this.Cart.findByPk(id);
+
+        return cart;
+    }
+
     async add (params) {
     }
 

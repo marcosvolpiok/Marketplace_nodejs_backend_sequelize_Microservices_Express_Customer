@@ -28,6 +28,13 @@ class orderRepository extends Interface(baseRepository) {
     }
 
     async add (params) {
+        const orderNew = await this.Order.create({
+            id_shop: params.idShop,
+            id_customer: params.idCustomer,
+            id_cart: params.idCart
+        });
+
+        return orderNew;
     }
 
     update (params) {

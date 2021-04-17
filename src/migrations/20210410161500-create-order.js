@@ -22,7 +22,8 @@ module.exports = {
       },
       id_state: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       updated_at: {
         type: Sequelize.DATE
