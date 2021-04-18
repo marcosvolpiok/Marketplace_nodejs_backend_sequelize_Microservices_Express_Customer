@@ -16,7 +16,7 @@ class cartService {
       }
 
       listByIdUserAndIdShop = async (req, res) => {
-        const cart=await this.cartRepository.listByIdUserAndIdShop(req.params.idCustomer, req.params.idShop);
+        const cart=await this.cartRepository.listByIdUserAndIdShop(req.params.idCustomer, req.params.idShop, req.body.state);
         
         return cart;
     }  
