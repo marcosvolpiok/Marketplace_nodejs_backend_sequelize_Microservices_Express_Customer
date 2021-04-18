@@ -55,7 +55,10 @@ class cartRepository extends Interface(baseRepository) {
     async add (params) {
     }
 
-    update (params) {
+    async update (params) {
+        const cart = await this.Cart.findByPk(params.id);
+        cart.state = params.state;
+        await cart.save(); 
     }
 
     delete (params) {

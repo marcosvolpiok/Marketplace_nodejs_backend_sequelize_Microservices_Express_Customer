@@ -35,6 +35,9 @@ class orderService {
                         quantity: prod.quantity
                     });
                 });
+
+                //Updates state of cart
+                await this.cartRepository.update({id: req.body.idCart, state: 1});
             }
 
             return {state: 'OK', detail: 'Tu pedido fue creado exitosamente', orderNew}
