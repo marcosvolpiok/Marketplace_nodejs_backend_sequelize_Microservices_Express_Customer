@@ -12,6 +12,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      price: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2)
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
