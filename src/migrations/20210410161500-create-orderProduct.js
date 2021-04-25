@@ -20,6 +20,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.SMALLINT
       },
+      price: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2)
+      },
       updated_at: {
         type: Sequelize.DATE
       },
