@@ -25,6 +25,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
+      total_amount: {
+        allowNull: false,
+        type: Sequelize.DECIMAL(10,2)
+      },
       updated_at: {
         type: Sequelize.DATE
       },

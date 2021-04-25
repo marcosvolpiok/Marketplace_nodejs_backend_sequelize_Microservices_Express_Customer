@@ -18,12 +18,16 @@ class orderService {
     }
 
     addFromCart = async (req, res) => {
+        const total = await this.cartProductRepository.getTotalAmountCart(req.body.idCart);
+        const totalAmount = total[0].dataValues.totalAmount;
+
         const cart = await this.cartRepository.listById(req.body.idCart);
         if(cart){
             const orderNew = await this.orderRepository.add({
                 idShop: cart.id_shop,
                 idCustomer: cart.id_customer,
-                idCart: req.body.idCart
+                idCart: req.body.idCart,
+                totalAmount: totalAmount
             });
 
             const cartProduct = await this.cartProductRepository.listById(req.body.idCart);

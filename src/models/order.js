@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     id_customer: {type: DataTypes.INTEGER, allowNull: false,},
     id_cart: {type: DataTypes.INTEGER, allowNull: false,},
     id_state: {type: DataTypes.INTEGER, allowNull: true},
+    total_amount: {type: DataTypes.DECIMAL(10,2), allowNull: false},
     updated_at: {type: DataTypes.STRING, allowNull: true},
     created_at: {type: DataTypes.DATE, allowNull: true},
   }, {

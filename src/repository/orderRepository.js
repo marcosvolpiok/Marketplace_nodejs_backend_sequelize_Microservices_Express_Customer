@@ -31,7 +31,8 @@ class orderRepository extends Interface(baseRepository) {
         const orderNew = await this.Order.create({
             id_shop: params.idShop,
             id_customer: params.idCustomer,
-            id_cart: params.idCart
+            id_cart: params.idCart,
+            total_amount: params.totalAmount
         });
 
         return orderNew;

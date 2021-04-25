@@ -115,6 +115,29 @@ class cartProductRepository extends Interface(baseRepository) {
             return {state: 'OBJECT_NO_FOUND', message: 'Object doesnt found'};
         }
     }
+
+    async getTotalAmountCart (id) {
+        await this.sequelize.query(
+            `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`,
+            { raw: true }
+        );
+
+        const cart = await this.CartProduct.findAll({
+            attributes: [
+              'id_cart',
+              [this.Sequelize.literal('( SUM (price * quantity) )'), 'totalAmount']
+            ],
+            group: ['id_cart'],
+            where: {
+                id_cart: id
+            },
+            include: [
+                { model: this.Product, as: 'product', attributes: [] }
+            ],
+          });
+
+        return cart;
+    }
 }
 
 module.exports = cartProductRepository;
