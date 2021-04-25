@@ -39,7 +39,8 @@ class orderProductRepository extends Interface(baseRepository) {
             id_shop: params.idShop,
             id_order: params.idOrder,
             id_product: params.idProduct,
-            quantity: params.quantity
+            quantity: params.quantity,
+            price: params.price
         });
 
         return orderProductNew;

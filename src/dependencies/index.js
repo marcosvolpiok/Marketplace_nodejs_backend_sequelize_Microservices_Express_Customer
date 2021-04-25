@@ -51,7 +51,7 @@ const cartRepositoryOb=new cartRepository(Cart, Shop, Sequelize, sequelize);
 const cartServiceOb = new cartService(cartRepositoryOb);
 const cartControllerOb = new cartController(cartServiceOb);
 
-const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop, Sequelize, sequelize);
+const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop, Product, Sequelize, sequelize);
 const cartProductServiceOb = new cartProductService(cartProductRepositoryOb);
 const cartProductControllerOb = new cartProductController(cartProductServiceOb);
 

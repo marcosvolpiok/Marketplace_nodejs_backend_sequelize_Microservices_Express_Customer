@@ -32,7 +32,8 @@ class orderService {
                     await this.orderProductRepository.add({
                         idOrder: orderNew.id,
                         idProduct: prod.id_product,
-                        quantity: prod.quantity
+                        quantity: prod.quantity,
+                        price: prod.product[0].price
                     });
                 });
 

@@ -2,11 +2,12 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class cartProductRepository extends Interface(baseRepository) {
-    constructor(CartProduct, Cart, Shop, Sequelize, sequelize) {
+    constructor(CartProduct, Cart, Shop, Product, Sequelize, sequelize) {
         super();
         this.CartProduct=CartProduct;
         this.Cart=Cart;
         this.Shop=Shop;
+        this.Product=Product;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
@@ -19,7 +20,8 @@ class cartProductRepository extends Interface(baseRepository) {
             id_cart: idCart 
         },
         include: [
-            { model: this.Cart, as: 'cart' }
+            { model: this.Cart, as: 'cart' },
+            { model: this.Product, as: 'product' }
         ],
      });
 
