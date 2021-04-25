@@ -29,7 +29,7 @@ router.get('/shops/catalog/detail/:id', productControllerOb.listById);
 
 router.get('/cart/', cartControllerOb.list);
 router.get('/cart/user/:idCustomer', cartControllerOb.listByIdUser);
-router.get('/cart/user/:idCustomer/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
+router.post('/cart/user/:idCustomer/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
 
 router.get('/cart/:idCart', cartProductControllerOb.listById);
 router.put('/cart/', cartProductControllerOb.add);
