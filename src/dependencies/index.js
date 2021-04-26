@@ -29,7 +29,7 @@ const orderProductService = require('../services/orderProductService');
 
 
 
-const {Message, Server, Shop, Product, Image, Cart, CartProduct, Order, OrderProduct, Sequelize, sequelize} = require('../models');
+const {Message, Server, Shop, Product, Image, Cart, CartProduct, Order, OrderProduct, Customer, Sequelize, sequelize} = require('../models');
 
 const serverRepositoryOb=new serverRepository(Server);
 const serverServiceOb = new serverService(serverRepositoryOb);
@@ -59,7 +59,7 @@ const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, P
 const orderProductServiceOb = new orderProductService(orderProductRepositoryOb);
 const orderProductControllerOb = new orderProductController(orderProductServiceOb);
 
-const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Sequelize, sequelize);
+const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Customer, Sequelize, sequelize);
 const orderServiceOb = new orderService(orderRepositoryOb, orderProductRepositoryOb, cartRepositoryOb, cartProductRepositoryOb);
 const orderControllerOb = new orderController(orderServiceOb);
 

@@ -2,11 +2,12 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class orderRepository extends Interface(baseRepository) {
-    constructor(Order, OrderProduct, Shop, Sequelize, sequelize) {
+    constructor(Order, OrderProduct, Shop, Customer, Sequelize, sequelize) {
         super();
         this.Order=Order;
         this.OrderProduct=OrderProduct;
         this.Shop=Shop;
+        this.Customer=Customer;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
@@ -48,7 +49,10 @@ class orderRepository extends Interface(baseRepository) {
         const order = await this.Order.findAll({
             where: {
                 id_shop: idShop
-            }
+            },
+            include: [
+                { model: this.Customer, as: 'customer' }
+            ],
         });
 
         return order;
