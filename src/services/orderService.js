@@ -63,6 +63,12 @@ class orderService {
         return order;
     }
 
+    listById = async (req, res) => {
+        const order=await this.orderRepository.listById(req.params.id);
+          
+        return order;
+    }
+
 }
 
 module.exports = orderService;
