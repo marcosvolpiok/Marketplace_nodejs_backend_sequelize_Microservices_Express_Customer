@@ -39,9 +39,12 @@ router.patch('/cart/product/', cartProductControllerOb.update);
 router.get('/order/', orderControllerOb.list);
 router.put('/order/', orderControllerOb.addFromCart);
 router.put('/order/byCart/', orderControllerOb.addFromCart);
+router.get('/order/customer/:id', orderControllerOb.listByIdCustomer);
+router.get('/order/shop/:id', orderControllerOb.listByIdShop);
 
 router.get('/order/product/:id', orderProductControllerOb.listById);
-router.get('/order/customer/:id', orderControllerOb.listByIdCustomer);
+
+
 
 
 function listByServer(req, res, next){

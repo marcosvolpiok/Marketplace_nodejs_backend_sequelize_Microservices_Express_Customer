@@ -57,6 +57,12 @@ class orderService {
         return order;
     }
 
+    listByIdShop = async (req, res) => {
+        const order=await this.orderRepository.listByIdShop(req.params.id);
+          
+        return order;
+    }
+
 }
 
 module.exports = orderService;
