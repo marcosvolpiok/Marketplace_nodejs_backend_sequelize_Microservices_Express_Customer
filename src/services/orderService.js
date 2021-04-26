@@ -50,6 +50,13 @@ class orderService {
             return {state: 'ERROR_CART_NOT_FOUND', detail: 'Tu pedido fue creado exitosamente'}
         }
     }
+
+    listByIdCustomer = async (req, res) => {
+        const order=await this.orderRepository.listByIdCustomer(req.params.id);
+          
+        return order;
+    }
+
 }
 
 module.exports = orderService;

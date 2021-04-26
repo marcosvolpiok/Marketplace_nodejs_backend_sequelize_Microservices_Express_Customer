@@ -27,6 +27,20 @@ class orderRepository extends Interface(baseRepository) {
         
     }
 
+    async listByIdCustomer (idCustomer)
+    {
+        const order = await this.Order.findAll({
+            include: [
+                { model: this.Shop, as: 'shop' }
+            ],
+            where: {
+                id_customer: idCustomer
+            }
+        });
+
+        return order;
+    }
+
     async add (params) {
         const orderNew = await this.Order.create({
             id_shop: params.idShop,

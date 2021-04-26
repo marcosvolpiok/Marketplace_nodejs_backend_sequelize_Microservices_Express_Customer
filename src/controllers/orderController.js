@@ -20,7 +20,17 @@ class orderController{
       res.status(500).json({message: e.message})
       console.log(e)
     }
-  }  
+  }
+  
+  listByIdCustomer = async (req, res) => { 
+    try{
+      const order=await this.orderService.listByIdCustomer(req);
+      res.json(order);
+    }catch(e){
+      res.status(500).json({message: e.message})
+      console.log(e)
+    }
+  }
 }
 
 
