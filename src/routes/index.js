@@ -41,7 +41,7 @@ router.put('/order/', orderControllerOb.addFromCart);
 router.put('/order/byCart/', orderControllerOb.addFromCart);
 router.get('/order/customer/:id', orderControllerOb.listByIdCustomer);
 router.get('/order/shop/:id', orderControllerOb.listByIdShop);
-router.get('/order/:id', orderControllerOb.listById);
+router.get('/order/:id/:hash', orderControllerOb.listById);
 
 
 router.get('/order/product/:id', orderProductControllerOb.listById);

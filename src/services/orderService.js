@@ -4,7 +4,7 @@ class orderService {
         this.orderProductRepository=orderProductRepository;
         this.cartRepository=cartRepository;
         this.cartProductRepository=cartProductRepository;
-        
+        this.sha1 = require('js-sha1');
       }
       
     list = async (req, res) => {
@@ -54,20 +54,30 @@ class orderService {
 
     listByIdCustomer = async (req, res) => {
         const order=await this.orderRepository.listByIdCustomer(req.params.id);
-          
+        order.forEach((ord, index)=>{
+            order[index].dataValues.hash = this.sha1(ord.id + '_SALT_NYAN');
+        });
+
         return order;
     }
 
     listByIdShop = async (req, res) => {
         const order=await this.orderRepository.listByIdShop(req.params.id);
-          
+        order.forEach((ord, index)=>{
+            order[index].dataValues.hash = this.sha1(ord.id + '_SALT_NYAN');
+        });
+        
         return order;
     }
 
     listById = async (req, res) => {
-        const order=await this.orderRepository.listById(req.params.id);
-          
-        return order;
+        if(this.sha1(req.params.id + '_SALT_NYAN')===req.params.hash){
+            const order=await this.orderRepository.listById(req.params.id);
+            
+            return order;
+        }else{
+            return {state: 'NOT_FOUND', message: 'ORDER NOT FOUND'}
+        }
     }
 
 }
