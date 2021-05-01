@@ -37,6 +37,7 @@ class orderService {
                         idOrder: orderNew.id,
                         idProduct: prod.id_product,
                         quantity: prod.quantity,
+                        name: prod.product[0].name,
                         price: prod.product[0].price
                     });
                 });

@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     id_order: {type: DataTypes.INTEGER, allowNull: false,},
     id_product: {type: DataTypes.INTEGER, allowNull: false,},
     quantity: {type: DataTypes.SMALLINT, allowNull: false,},
+    name: {type: DataTypes.STRING, allowNull: false,},
     price: {type: DataTypes.DECIMAL(10,2), allowNull: false},
     updated_at: {type: DataTypes.STRING, allowNull: true},
     created_at: {type: DataTypes.DATE, allowNull: true}

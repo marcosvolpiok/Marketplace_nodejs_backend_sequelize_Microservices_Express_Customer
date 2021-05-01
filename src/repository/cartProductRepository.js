@@ -75,10 +75,13 @@ class cartProductRepository extends Interface(baseRepository) {
                 }
             };
         } else {
+            //Searches product
+            const product = await this.Product.findByPk(params.idProduct);
             const cartProductNew = await this.CartProduct.create({
                 id_cart: cartId,
                 id_product: params.idProduct,
-                quantity: params.quantity
+                quantity: params.quantity,
+                price: product.price
             });
 
             return cartProductNew;
