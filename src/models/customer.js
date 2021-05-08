@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
   };
   Customer.init({
     id: {type: DataTypes.SMALLINT, primaryKey: true, autoIncrement: true, allowNull: false},
-    first_name: {type: DataTypes.STRING, allowNull: false,},
-    last_name: {type: DataTypes.STRING, allowNull: false,},
+    first_name: {type: DataTypes.STRING, allowNull: true,},
+    last_name: {type: DataTypes.STRING, allowNull: true,},
     password: {type: DataTypes.STRING, allowNull: false,},
     mail: {type: DataTypes.STRING, allowNull: false,},
-    address: {type: DataTypes.STRING, allowNull: false,},
-    phone: {type: DataTypes.STRING, allowNull: false,},
-    updatedAt: {type: DataTypes.DATE, allowNull: true},
-    createdAt: {type: DataTypes.DATE, allowNull: false}
+    address: {type: DataTypes.STRING, allowNull: true,},
+    phone: {type: DataTypes.STRING, allowNull: true,},
+    updatedAt: {type: DataTypes.DATE},
+    createdAt: {type: DataTypes.DATE}
   }, {
     sequelize,
     modelName: 'Customer',

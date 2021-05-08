@@ -9,15 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       first_name: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       last_name: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       password: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       mail: {
@@ -25,11 +25,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       address: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       phone: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
