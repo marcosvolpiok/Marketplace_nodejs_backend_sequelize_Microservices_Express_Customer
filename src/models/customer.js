@@ -20,12 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     mail: {type: DataTypes.STRING, allowNull: false,},
     address: {type: DataTypes.STRING, allowNull: false,},
     phone: {type: DataTypes.STRING, allowNull: false,},
-    updated_at: {type: DataTypes.STRING, allowNull: true},
-    created_at: {type: DataTypes.DATE, allowNull: false}
+    updatedAt: {type: DataTypes.DATE, allowNull: true},
+    createdAt: {type: DataTypes.DATE, allowNull: false}
   }, {
     sequelize,
     modelName: 'Customer',
-    timestamps: false,
+    timestamps: true,
     autoQueryFallback: true
   });
   return Customer;

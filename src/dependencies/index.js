@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const loginHelper = require('../helpers/loginHelper');
+
 const serverController = require('../controllers/serverController');
 const messageController = require('../controllers/messageController');
 const shopController = require('../controllers/shopController');
@@ -6,7 +9,7 @@ const cartController = require('../controllers/cartController');
 const cartProductController = require('../controllers/cartProductController');
 const orderController = require('../controllers/orderController');
 const orderProductController = require('../controllers/orderProductController');
-
+const customerController = require('../controllers/customerController');
 
 const serverRepository = require('../repository/serverRepository');
 const messageRepository = require('../repository/messageRepository');
@@ -16,6 +19,8 @@ const cartRepository = require('../repository/cartRepository');
 const cartProductRepository = require('../repository/cartProductRepository');
 const orderRepository = require('../repository/orderRepository');
 const orderProductRepository = require('../repository/orderProductRepository');
+const customerRepository = require('../repository/customerRepository');
+
 
 
 const serverService = require('../services/serverService');
@@ -26,6 +31,7 @@ const cartService = require('../services/cartService');
 const cartProductService = require('../services/cartProductService');
 const orderService = require('../services/orderService');
 const orderProductService = require('../services/orderProductService');
+const customerService = require('../services/customerService');
 
 
 
@@ -63,6 +69,10 @@ const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Customer,
 const orderServiceOb = new orderService(orderRepositoryOb, orderProductRepositoryOb, cartRepositoryOb, cartProductRepositoryOb);
 const orderControllerOb = new orderController(orderServiceOb);
 
+const customerRepositoryOb=new customerRepository(Customer, Sequelize, sequelize);
+const customerServiceOb = new customerService(customerRepositoryOb, bcrypt, loginHelper);
+const customerControllerOb = new customerController(customerServiceOb);
+
 module.exports = {
-    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb
 };

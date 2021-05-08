@@ -10,6 +10,7 @@ const indexRoutes = require('./routes/index');
 //app.use(bodyParser.json());
 app.use(express.json());
 
+require('dotenv').config();
 
 // settings
 app.set('port', process.env.PORT || 4000);

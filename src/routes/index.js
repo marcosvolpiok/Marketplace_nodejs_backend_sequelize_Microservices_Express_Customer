@@ -10,7 +10,8 @@ const {
     cartControllerOb,
     cartProductControllerOb,
     orderControllerOb,
-    orderProductControllerOb
+    orderProductControllerOb,
+    customerControllerOb
 } = require('../dependencies/');
 
 router.get('/servers/', serverControllerOb.list);
@@ -45,6 +46,10 @@ router.get('/order/:id/:hash', orderControllerOb.listById);
 
 
 router.get('/order/product/:id', orderProductControllerOb.listById);
+
+router.get('/customer/', customerControllerOb.list);
+router.put('/customer/', customerControllerOb.add);
+router.post('/customer/login/', customerControllerOb.login);
 
 
 
