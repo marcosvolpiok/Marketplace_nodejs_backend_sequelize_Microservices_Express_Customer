@@ -6,21 +6,23 @@ const verifyPassword = async (customer, req)=>{
     if(result){
         return getToken(customer);
     }else{
-        //else return {status: 401, data: 'Authentication failed'}
-        //res.status(401).send({message : "Authentication failed ..."})
         return {status: 'LOGIN_WRONG', message: 'Password or mail wrong'};
     }
 }
 
 
 const getToken = (user) =>{
-    const token = jwt.sign({ mail: user.mail, userId : user.id,},
-        process.env.JWT_KEY, { expiresIn:"5256000h"})
-
-        //return {status: 200, message: 'Auth successful', user, token: token}
+    const token = jwt.sign({
+            mail: user.mail,
+            idCustomer: user.id,
+            idShop: user.id_shop
+        },
+        process.env.JWT_KEY,
+        { expiresIn:"5256000h"}
+    );
         
     return {
-        message : "Auth successful",
+        message: "Auth successful",
         user: user,
         token : token
     };

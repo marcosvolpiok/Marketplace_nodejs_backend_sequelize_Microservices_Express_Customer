@@ -89,16 +89,35 @@ class cartProductRepository extends Interface(baseRepository) {
     }
 
     async update (params) {
-        const cartProduct = await this.CartProduct.findByPk(params.id);
-        if(params.quantity == 0){
-            const destroy = await cartProduct.destroy();
+        const cartProduct = await this.CartProduct.findOne(
+        {
+            include: [
+                {
+                    model: this.Cart,
+                    as: 'cart', attributes: [],
+                    where: {
+                        'id_customer': params.res.userData.idCustomer
+                    }
+                }
+            ],
+            where: {
+                'id': params.id,
+            }
+        });
+        
+        if(cartProduct){
+            if(params.quantity == 0){
+                const destroy = await cartProduct.destroy();
 
-            return destroy;
+                return destroy;
+            }else{
+                cartProduct.quantity = params.quantity;
+                const update = await cartProduct.save();
+
+                return update;
+            }
         }else{
-            cartProduct.quantity = params.quantity;
-            const update = await cartProduct.save();
-
-            return update;
+            return {status: 'CART_NOT_FOUND', message: 'No se encontró el carrito'};
         }
     }
 
@@ -107,7 +126,16 @@ class cartProductRepository extends Interface(baseRepository) {
             where: {
                 id_cart: params.idCart,
                 id_product: params.idProduct,
-            }
+            },
+            include: [
+                {
+                    model: this.Cart,
+                    as: 'cart', attributes: [],
+                    where: {
+                        'id_customer': params.res.userData.idCustomer
+                    }
+                }
+            ],
         });
 
         if(cartProduct){

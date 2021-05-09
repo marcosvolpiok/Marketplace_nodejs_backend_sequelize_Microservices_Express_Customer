@@ -47,7 +47,7 @@ class cartProductService {
         if(customer){
             customerLoged = await this.loginHelper.verifyPassword(customer, req);
         } else {
-            customerLoged = {message: USER_DOESNT_EXISTS};
+            customerLoged = {status: 'USER_DOESNT_EXISTS', message: 'Usuario o contraseña incorrecto'};
         }
         return customerLoged;
     }

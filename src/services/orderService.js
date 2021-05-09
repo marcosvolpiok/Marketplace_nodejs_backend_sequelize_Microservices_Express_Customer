@@ -15,16 +15,17 @@ class orderService {
 
 
     addFromCart = async (req, res) => {
-        const total = await this.cartProductRepository.getTotalAmountCart(req.body.idCart);
-        const totalAmount = total[0].dataValues.totalAmount;
-
         const cart = await this.cartRepository.listById(req.body.idCart);
-        if(cart){
+        if(cart && cart.id_customer==res.userData.idCustomer){
+            const total = await this.cartProductRepository.getTotalAmountCart(req.body.idCart);
+            const totalAmount = total[0].dataValues.totalAmount;
+
             const orderNew = await this.orderRepository.add({
                 idShop: cart.id_shop,
                 idCustomer: cart.id_customer,
                 idCart: req.body.idCart,
-                totalAmount: totalAmount
+                totalAmount: totalAmount,
+                res: res
             });
 
             const cartProduct = await this.cartProductRepository.listById(req.body.idCart);
@@ -45,12 +46,12 @@ class orderService {
 
             return {state: 'OK', detail: 'Tu pedido fue creado exitosamente', orderNew}
         } else {
-            return {state: 'ERROR_CART_NOT_FOUND', detail: 'Tu pedido fue creado exitosamente'}
+            return {state: 'ERROR_CART_NOT_FOUND', detail: 'Carrito no encontrado'}
         }
     }
 
-    listByIdCustomer = async (req, res) => {
-        const order=await this.orderRepository.listByIdCustomer(req.params.id);
+    listByIdCustomer = async (res) => {
+        const order=await this.orderRepository.listByIdCustomer(res);
         order.forEach((ord, index)=>{
             order[index].dataValues.hash = this.sha1(ord.id + '_SALT_NYAN');
         });
@@ -59,7 +60,7 @@ class orderService {
     }
 
     listByIdShop = async (req, res) => {
-        const order=await this.orderRepository.listByIdShop(req.params.id);
+        const order=await this.orderRepository.listByIdShop(res);
         order.forEach((ord, index)=>{
             order[index].dataValues.hash = this.sha1(ord.id + '_SALT_NYAN');
         });
@@ -69,7 +70,7 @@ class orderService {
 
     listById = async (req, res) => {
         if(this.sha1(req.params.id + '_SALT_NYAN')===req.params.hash){
-            const order=await this.orderRepository.listById(req.params.id);
+            const order=await this.orderRepository.listById(req.params.id, res);
             
             return order;
         }else{

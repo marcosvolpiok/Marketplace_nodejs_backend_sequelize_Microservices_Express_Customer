@@ -14,7 +14,7 @@ class cartController{
 
   listByIdUser = async (req, res) => { 
     try{
-      const cart=await this.cartService.listByIdUser(req);
+      const cart=await this.cartService.listByIdUser(res);
       res.json(cart);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -23,7 +23,7 @@ class cartController{
 
   listByIdUserAndIdShop = async (req, res) => { 
     try{
-      const cart=await this.cartService.listByIdUserAndIdShop(req);
+      const cart=await this.cartService.listByIdUserAndIdShop(req, res);
       res.json(cart);
     }catch(e){
       res.status(500).json({message: e.message})

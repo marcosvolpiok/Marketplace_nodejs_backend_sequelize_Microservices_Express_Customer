@@ -10,7 +10,10 @@ class orderProductService {
       }
 
       listById = async (req, res) => {
-        const orderProduct=await this.orderProductRepository.listById(req.params.id);
+        const orderProduct=await this.orderProductRepository.listById(
+            req.params.id,
+            res
+        );
         
         return orderProduct;
     }

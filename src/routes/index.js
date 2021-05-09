@@ -22,8 +22,8 @@ router.get('/shops/catalog/:id', checkAuth, productControllerOb.listByShop);
 router.get('/shops/catalog/detail/:id', checkAuth, productControllerOb.listById);
 
 router.get('/cart/', checkAuth, cartControllerOb.list);
-router.get('/cart/user/:idCustomer', checkAuth, cartControllerOb.listByIdUser);
-router.post('/cart/user/:idCustomer/shop/:idShop', checkAuth, cartControllerOb.listByIdUserAndIdShop);
+router.get('/cart/user/', checkAuth, cartControllerOb.listByIdUser);
+router.get('/cart/shop/:idShop', checkAuth, cartControllerOb.listByIdUserAndIdShop);
 
 router.get('/cart/:idCart', checkAuth, cartProductControllerOb.listById);
 router.put('/cart/', checkAuth, cartProductControllerOb.add);
@@ -33,8 +33,8 @@ router.patch('/cart/product/', checkAuth, cartProductControllerOb.update);
 router.get('/order/', checkAuth, orderControllerOb.list);
 router.put('/order/', checkAuth, orderControllerOb.addFromCart);
 router.put('/order/byCart/', checkAuth, orderControllerOb.addFromCart);
-router.get('/order/customer/:id', checkAuth, orderControllerOb.listByIdCustomer);
-router.get('/order/shop/:id', checkAuth, orderControllerOb.listByIdShop);
+router.get('/order/customer/', checkAuth, orderControllerOb.listByIdCustomer);
+router.get('/order/shop/', checkAuth, orderControllerOb.listByIdShop);
 router.get('/order/:id/:hash', checkAuth, orderControllerOb.listById);
 
 

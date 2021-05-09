@@ -28,14 +28,15 @@ class orderRepository extends Interface(baseRepository) {
         
     }
 
-    async listByIdCustomer (idCustomer)
+    async listByIdCustomer (res)
     {
+        console.log(res);
         const order = await this.Order.findAll({
             include: [
                 { model: this.Shop, as: 'shop' }
             ],
             where: {
-                id_customer: idCustomer
+                id_customer: res.userData.idCustomer
             }
         });
 
@@ -44,11 +45,11 @@ class orderRepository extends Interface(baseRepository) {
 
 
     
-    async listByIdShop (idShop)
+    async listByIdShop (res)
     {
         const order = await this.Order.findAll({
             where: {
-                id_shop: idShop
+                id_shop: res.userData.idShop
             },
             include: [
                 { model: this.Customer, as: 'customer' }
@@ -58,13 +59,20 @@ class orderRepository extends Interface(baseRepository) {
         return order;
     }
 
-    async listById (id)
+    async listById (id, res)
     {
-        const order = await this.Order.findByPk(id, {
+        const order = await this.Order.findOne({
             include: [
                 { model: this.Customer, as: 'customer' },
                 { model: this.OrderProduct, as: 'orderProduct' }
             ],
+            where: {
+                [this.Op.or]: [
+                  { id_shop: res.userData.idShop },
+                  { id_customer: res.userData.idCustomer }
+                ],
+                id: id
+              }
         });
 
         return order;
@@ -73,7 +81,7 @@ class orderRepository extends Interface(baseRepository) {
     async add (params) {
         const orderNew = await this.Order.create({
             id_shop: params.idShop,
-            id_customer: params.idCustomer,
+            id_customer: params.res.userData.idCustomer,
             id_cart: params.idCart,
             total_amount: params.totalAmount
         });

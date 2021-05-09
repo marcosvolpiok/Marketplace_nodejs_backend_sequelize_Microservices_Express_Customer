@@ -9,14 +9,19 @@ class cartService {
           return cart;
       }
 
-      listByIdUser = async (req, res) => {
-          const cart=await this.cartRepository.listByIdUser(req.params.idCustomer);
+      listByIdUser = async (res) => {
+          const cart=await this.cartRepository.listByIdUser(res);
           
           return cart;
       }
 
       listByIdUserAndIdShop = async (req, res) => {
-        const cart=await this.cartRepository.listByIdUserAndIdShop(req.params.idCustomer, req.params.idShop, req.body.state);
+        const cart=await this.cartRepository.listByIdUserAndIdShop(
+            req.params.idCustomer,
+            req.params.idShop,
+            req.body.state,
+            res
+        );
         
         return cart;
     }  

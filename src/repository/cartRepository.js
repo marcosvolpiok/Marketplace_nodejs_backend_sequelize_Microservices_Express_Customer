@@ -18,10 +18,10 @@ class cartRepository extends Interface(baseRepository) {
         return cart;
     }
 
-    async listByIdUser (idCustomer) {
+    async listByIdUser (res) {
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
-            id_customer: idCustomer 
+            id_customer: res.userData.idCustomer 
         },
         include: [
             { model: this.Shop, as: 'shop' }
@@ -31,10 +31,10 @@ class cartRepository extends Interface(baseRepository) {
         return cart;
     }
 
-    async listByIdUserAndIdShop (idCustomer, idShop, state) {
+    async listByIdUserAndIdShop (idCustomer, idShop, state, res) {
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
-            id_customer: idCustomer,
+            id_customer: res.userData.idCustomer,
             id_shop: idShop,
             state: state
         },
