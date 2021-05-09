@@ -45,12 +45,8 @@ class cartProductService {
         const customer = await this.customerRepository.findOne({where: {mail: req.body.mail}});
         let customerLoged;
         if(customer){
-            console.log(customer);
-            console.log('111111111');
             customerLoged = await this.loginHelper.verifyPassword(customer, req);
-            console.log('verifyp', customerLoged);
         } else {
-            console.log('222222222');
             customerLoged = {message: USER_DOESNT_EXISTS};
         }
         return customerLoged;
