@@ -13,9 +13,6 @@ class orderService {
         return order;
     }
 
-    addFromCart = async (req, res) => {
-        
-    }
 
     addFromCart = async (req, res) => {
         const total = await this.cartProductRepository.getTotalAmountCart(req.body.idCart);
