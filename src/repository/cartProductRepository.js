@@ -156,7 +156,7 @@ class cartProductRepository extends Interface(baseRepository) {
         const cart = await this.CartProduct.findAll({
             attributes: [
               'id_cart',
-              [this.Sequelize.literal('( SUM (price * quantity) )'), 'totalAmount']
+              [this.Sequelize.literal('( SUM(product.price * CartProduct.quantity) )'), 'totalAmount']
             ],
             group: ['id_cart'],
             where: {

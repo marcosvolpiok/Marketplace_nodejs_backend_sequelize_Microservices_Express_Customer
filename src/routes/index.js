@@ -23,7 +23,7 @@ router.get('/shops/catalog/detail/:id', checkAuth, productControllerOb.listById)
 
 router.get('/cart/', checkAuth, cartControllerOb.list);
 router.get('/cart/user/', checkAuth, cartControllerOb.listByIdUser);
-router.get('/cart/shop/:idShop', checkAuth, cartControllerOb.listByIdUserAndIdShop);
+router.post('/cart/shop/:idShop', checkAuth, cartControllerOb.listByIdUserAndIdShop);
 
 router.get('/cart/:idCart', checkAuth, cartProductControllerOb.listById);
 router.put('/cart/', checkAuth, cartProductControllerOb.add);
