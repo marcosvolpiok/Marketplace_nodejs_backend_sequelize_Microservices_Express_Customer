@@ -93,7 +93,25 @@ class orderRepository extends Interface(baseRepository) {
         return orderNew;
     }
 
-    update (params) {
+    async update (params) {
+        let orderUpdate;
+
+        const order = await this.Order.findOne({
+            where: {
+                [this.Op.or]: [
+                  { id_shop: params.res.userData.idShop },
+                  { id_customer: params.res.userData.idCustomer }
+                ],
+                id: params.id
+              }
+        });
+        if(order){
+            order.id_state = params.id_state;
+            orderUpdate = order.save();
+        }else{
+            orderUpdate = {state: 'ORDER_DOESNT_FOUND', detail: 'Pedido no encontrado'};
+        }
+        return orderUpdate;
     }
 
     delete (params) {

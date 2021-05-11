@@ -51,6 +51,16 @@ class orderController{
       console.log(e)
     }
   }
+
+  update = async (req, res) => { 
+    try{
+      const order=await this.orderService.update(req, res);
+      res.json(order);
+    }catch(e){
+      res.status(500).json({message: e.message})
+      console.log(e)
+    }
+  }
 }
 
 

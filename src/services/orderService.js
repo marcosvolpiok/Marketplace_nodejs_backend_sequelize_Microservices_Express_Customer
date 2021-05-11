@@ -78,6 +78,11 @@ class orderService {
         }
     }
 
+    update = async (req, res) => {
+        const order=await this.orderRepository.update({id: req.params.id, id_state: req.body.id_state, res: res});
+        
+        return order;
+    }
 }
 
 module.exports = orderService;
