@@ -2,12 +2,13 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class orderRepository extends Interface(baseRepository) {
-    constructor(Order, OrderProduct, Shop, Customer, Sequelize, sequelize) {
+    constructor(Order, OrderProduct, Shop, Customer, OrderState, Sequelize, sequelize) {
         super();
         this.Order=Order;
         this.OrderProduct=OrderProduct;
         this.Shop=Shop;
         this.Customer=Customer;
+        this.OrderState=OrderState;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
@@ -33,7 +34,8 @@ class orderRepository extends Interface(baseRepository) {
         console.log(res);
         const order = await this.Order.findAll({
             include: [
-                { model: this.Shop, as: 'shop' }
+                { model: this.Shop, as: 'shop' },
+                { model: this.OrderState, as: 'orderState' },
             ],
             where: {
                 id_customer: res.userData.idCustomer
@@ -52,7 +54,8 @@ class orderRepository extends Interface(baseRepository) {
                 id_shop: res.userData.idShop
             },
             include: [
-                { model: this.Customer, as: 'customer' }
+                { model: this.Customer, as: 'customer' },
+                { model: this.OrderState, as: 'orderState' },
             ],
         });
 
@@ -64,7 +67,8 @@ class orderRepository extends Interface(baseRepository) {
         const order = await this.Order.findOne({
             include: [
                 { model: this.Customer, as: 'customer' },
-                { model: this.OrderProduct, as: 'orderProduct' }
+                { model: this.OrderProduct, as: 'orderProduct' },
+                { model: this.OrderState, as: 'orderState' },
             ],
             where: {
                 [this.Op.or]: [
