@@ -10,6 +10,8 @@ const cartProductController = require('../controllers/cartProductController');
 const orderController = require('../controllers/orderController');
 const orderProductController = require('../controllers/orderProductController');
 const customerController = require('../controllers/customerController');
+const orderStateController = require('../controllers/orderStateController');
+
 
 const serverRepository = require('../repository/serverRepository');
 const messageRepository = require('../repository/messageRepository');
@@ -20,6 +22,7 @@ const cartProductRepository = require('../repository/cartProductRepository');
 const orderRepository = require('../repository/orderRepository');
 const orderProductRepository = require('../repository/orderProductRepository');
 const customerRepository = require('../repository/customerRepository');
+const orderStateRepository = require('../repository/orderStateRepository');
 
 
 
@@ -32,6 +35,7 @@ const cartProductService = require('../services/cartProductService');
 const orderService = require('../services/orderService');
 const orderProductService = require('../services/orderProductService');
 const customerService = require('../services/customerService');
+const orderStateService = require('../services/orderStateService');
 
 
 
@@ -73,6 +77,10 @@ const customerRepositoryOb=new customerRepository(Customer, Sequelize, sequelize
 const customerServiceOb = new customerService(customerRepositoryOb, bcrypt, loginHelper);
 const customerControllerOb = new customerController(customerServiceOb);
 
+const orderStateRepositoryOb=new orderStateRepository(OrderState, Sequelize, sequelize);
+const orderStateServiceOb = new orderStateService(orderStateRepositoryOb, bcrypt, loginHelper);
+const orderStateControllerOb = new orderStateController(orderStateServiceOb);
+
 module.exports = {
-    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb
+    Sequelize, sequelize, serverRepositoryOb, serverControllerOb, messageRepositoryOb, messageControllerOb, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb, orderStateControllerOb
 };

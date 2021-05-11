@@ -11,7 +11,8 @@ const {
     cartProductControllerOb,
     orderControllerOb,
     orderProductControllerOb,
-    customerControllerOb
+    customerControllerOb,
+    orderStateControllerOb
 } = require('../dependencies/');
 const checkAuth = require('../middlewares/checkAuth');
 
@@ -43,6 +44,8 @@ router.get('/order/product/:id', checkAuth, orderProductControllerOb.listById);
 router.get('/customer/', checkAuth, customerControllerOb.list);
 router.put('/customer/', checkAuth, customerControllerOb.add);
 router.post('/customer/login/', checkAuth, customerControllerOb.login);
+
+router.get('/order/states/', checkAuth, orderStateControllerOb.list);
 
 
 
