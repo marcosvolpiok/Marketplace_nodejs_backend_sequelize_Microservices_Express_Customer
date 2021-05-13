@@ -87,7 +87,8 @@ class orderRepository extends Interface(baseRepository) {
             id_shop: params.idShop,
             id_customer: params.res.userData.idCustomer,
             id_cart: params.idCart,
-            total_amount: params.totalAmount
+            total_amount: params.totalAmount,
+            id_state: 1
         });
 
         return orderNew;
