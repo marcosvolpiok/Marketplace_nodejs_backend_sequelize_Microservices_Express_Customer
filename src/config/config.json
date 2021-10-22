@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "1234",
-    "database": "todotex",
+    "database": "marketplace",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
