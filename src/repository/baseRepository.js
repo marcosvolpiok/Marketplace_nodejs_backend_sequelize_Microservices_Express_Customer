@@ -1,5 +1,5 @@
 const baseRepository = {
-    list: function() {
+    list: function(req) {
     },
     add: function(params) {
     },

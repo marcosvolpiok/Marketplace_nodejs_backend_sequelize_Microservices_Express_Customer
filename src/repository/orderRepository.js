@@ -2,7 +2,7 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class orderRepository extends Interface(baseRepository) {
-    constructor(Order, OrderProduct, Shop, Customer, OrderState, Sequelize, sequelize) {
+    constructor(Order, OrderProduct, Shop, Customer, OrderState, Sequelize, sequelize, cacheClient) {
         super();
         this.Order=Order;
         this.OrderProduct=OrderProduct;
@@ -12,15 +12,21 @@ class orderRepository extends Interface(baseRepository) {
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
-        
+        this.cacheClient = cacheClient;
     }
 
-    async list () {
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+        
         const order = await this.Order.findAll({
             include: [
                 { model: this.Shop, as: 'shop' }
             ]
         });
+        cacheHelper.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
@@ -29,9 +35,13 @@ class orderRepository extends Interface(baseRepository) {
         
     }
 
-    async listByIdCustomer (res)
+    async listByIdCustomer (req, res)
     {
-        console.log(res);
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const order = await this.Order.findAll({
             include: [
                 { model: this.Shop, as: 'shop' },
@@ -41,14 +51,20 @@ class orderRepository extends Interface(baseRepository) {
                 id_customer: res.userData.idCustomer
             }
         });
+        cacheHelper.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
 
 
     
-    async listByIdShop (res)
+    async listByIdShop (req, res)
     {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const order = await this.Order.findAll({
             where: {
                 id_shop: res.userData.idShop
@@ -58,12 +74,18 @@ class orderRepository extends Interface(baseRepository) {
                 { model: this.OrderState, as: 'orderState' },
             ],
         });
+        cacheHelper.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
 
-    async listById (id, res)
+    async listById (req, id, res)
     {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const order = await this.Order.findOne({
             include: [
                 { model: this.Customer, as: 'customer' },
@@ -78,6 +100,7 @@ class orderRepository extends Interface(baseRepository) {
                 id: id
               }
         });
+        cacheHelper.setCache(req.url, JSON.stringify(order));
 
         return order;
     }

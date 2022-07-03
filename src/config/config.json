@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
+    "username": "admin",
     "password": "1234",
-    "database": "marketplace",
+    "database": "marketplace_moda",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

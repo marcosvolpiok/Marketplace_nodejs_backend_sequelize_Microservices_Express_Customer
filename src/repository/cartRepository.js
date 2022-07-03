@@ -2,36 +2,53 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class cartRepository extends Interface(baseRepository) {
-    constructor(Cart, Shop, Sequelize, sequelize) {
+    constructor(Cart, Shop, Sequelize, sequelize, cacheClient) {
         super();
         this.Cart=Cart;
         this.Shop=Shop;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
-        
+        this.cacheClient = cacheClient;
     }
 
-    async list () {
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const cart = await this.Cart.findAll({ attributes: ['id']  });
-
+        cacheHelper.setCache(req.url, JSON.stringify(cart));
+         
         return cart;
     }
 
-    async listByIdUser (res) {
+    async listByIdUser (req, res) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
-        where: {
-            id_customer: res.userData.idCustomer 
-        },
-        include: [
-            { model: this.Shop, as: 'shop' }
-        ],
-     });
+            where: {
+                id_customer: res.userData.idCustomer 
+            },
+            include: [
+                { model: this.Shop, as: 'shop' }
+            ],
+        });
+        cacheHelper.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }
 
-    async listByIdUserAndIdShop (idCustomer, idShop, state, res) {
+    async listByIdUserAndIdShop (req, idCustomer, idShop, state, res) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
             id_customer: res.userData.idCustomer,
@@ -41,13 +58,20 @@ class cartRepository extends Interface(baseRepository) {
         include: [
             { model: this.Shop, as: 'shop' }
         ],
-     });
+        });
+        cacheHelper.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }
 
-    async listById (id) {
+    async listById (req, id) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+        
         const cart = await this.Cart.findByPk(id);
+        cacheHelper.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }

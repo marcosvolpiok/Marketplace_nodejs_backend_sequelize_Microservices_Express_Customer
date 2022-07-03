@@ -2,41 +2,63 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class customerRepository extends Interface(baseRepository) {
-    constructor(Customer, Sequelize, sequelize) {
+    constructor(Customer, Sequelize, sequelize, cacheClient) {
         super();
         this.Customer=Customer;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
-        
+        this.cacheClient = cacheClient;
     }
 
-    async listByIdUser (idUser) {
-        const customer = await this.Customer.findAll({ attributes: ['id', 'id_cart', 'id_product', 'quantity'],
-        where: {
-            id: idUser 
+    async listByIdUser (req, idUser) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
         }
-     });
 
-     return customer;
+        const customer = await this.Customer.findAll({ attributes: ['id', 'id_cart', 'id_product', 'quantity'],
+            where: {
+                id: idUser 
+            }
+        });
+        cacheHelper.setCache(req.url, JSON.stringify(customer));
+
+        return customer;
     }
     
 
-    async list () {
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const customer = await this.Customer.findAll();
+        cacheHelper.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
-    async find (params) {
+    async find (req, params) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
         const customer = await this.Customer.findAll(params);
+        cacheHelper.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
-    async findOne (params) {
+    async findOne (req, params) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
         const customer = await this.Customer.findOne(params);
-
+        cacheHelper.setCache(req.url, JSON.stringify(customer));
+        
         return customer;
     }
     

@@ -2,40 +2,57 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class productRepository extends Interface(baseRepository) {
-    constructor(Product, Image, Sequelize, sequelize) {
+    constructor(Product, Image, Sequelize, sequelize, cacheClient) {
         super();
         this.Product=Product;
         this.Image=Image;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
+        this.cacheClient = cacheClient;
+    }
+
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
+        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
+            include: [
+                { model: this.Image, as: 'image' }
+            ]
+        });
+        cacheHelper.setCache(req.url, JSON.stringify(product));
+
+        return product;
+    }
+
+    async listByShop (req, idShop) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
+        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
+            where: {
+                id_shop: idShop
+            },
+            include: [
+                { model: this.Image, as: 'image' }
+            ]
+        });
+        cacheHelper.setCache(req.url, JSON.stringify(product));
+
+        return product;
+    }
+
+    async listById (req, id) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
         
-    }
-
-    async list () {
-        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
-        include: [
-            { model: this.Image, as: 'image' }
-        ]
-             });
-
-        return product;
-    }
-
-    async listByShop (idShop) {
-        const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
-        where: {
-            id_shop: idShop
-        },
-        include: [
-            { model: this.Image, as: 'image' }
-        ]
-             });
-
-        return product;
-    }
-
-    async listById (id) {
         const product = await this.Product.findOne({
             where:{
                 id: id
@@ -44,6 +61,7 @@ class productRepository extends Interface(baseRepository) {
             { model: this.Image, as: 'image' }
         ]
         });
+        cacheHelper.setCache(req.url, JSON.stringify(product));
 
         return product;
     }

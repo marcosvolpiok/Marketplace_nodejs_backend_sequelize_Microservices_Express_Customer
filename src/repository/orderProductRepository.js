@@ -2,7 +2,7 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class orderProductRepository extends Interface(baseRepository) {
-    constructor(Order, OrderProduct, Product, Shop, Sequelize, sequelize) {
+    constructor(Order, OrderProduct, Product, Shop, Sequelize, sequelize, cacheClient) {
         super();
         this.Order=Order;
         this.OrderProduct=OrderProduct;
@@ -11,16 +11,27 @@ class orderProductRepository extends Interface(baseRepository) {
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
-        
+        this.cacheClient = cacheClient;   
     }
 
-    async list () {
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const OrderProduct = await this.OrderProduct.findAll();
+        cacheHelper.setCache(req.url, JSON.stringify(OrderProduct));
 
         return OrderProduct;
     }
 
-    async listById (id) {
+    async listById (req, id) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const OrderProduct = await this.OrderProduct.findAll({
         where: {
             id_order: id 
@@ -31,6 +42,8 @@ class orderProductRepository extends Interface(baseRepository) {
             
         ],
         });
+        cacheHelper.setCache(req.url, JSON.stringify(OrderProduct));
+        
         return OrderProduct;
     }
 

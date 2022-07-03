@@ -2,17 +2,23 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class orderStateRepository extends Interface(baseRepository) {
-    constructor(OrderState, Sequelize, sequelize) {
+    constructor(OrderState, Sequelize, sequelize, cacheClient) {
         super();
         this.OrderState=OrderState;
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
-        
+        this.cacheClient = cacheClient;
     }
 
-    async list () {
+    async list (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const orderState = await this.OrderState.findAll();
+        cacheHelper.setCache(req.url, JSON.stringify(orderState));
 
         return orderState;
     }

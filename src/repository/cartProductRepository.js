@@ -2,7 +2,7 @@ const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
 
 class cartProductRepository extends Interface(baseRepository) {
-    constructor(CartProduct, Cart, Shop, Product, Sequelize, sequelize) {
+    constructor(CartProduct, Cart, Shop, Product, Sequelize, sequelize, cacheClient) {
         super();
         this.CartProduct=CartProduct;
         this.Cart=Cart;
@@ -11,10 +11,16 @@ class cartProductRepository extends Interface(baseRepository) {
         this.Sequelize=Sequelize;
         this.sequelize=sequelize;
         this.Op = this.Sequelize.Op;
+        this.cacheClient = cacheClient;
         
     }
 
-    async listById (idCart) {
+    async listById (req, idCart) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
+        }
+
         const cart = await this.CartProduct.findAll({ attributes: ['id', 'id_cart', 'id_product', 'quantity'],
         where: {
             id_cart: idCart 
@@ -24,12 +30,14 @@ class cartProductRepository extends Interface(baseRepository) {
             { model: this.Product, as: 'product' }
         ],
      });
+     cacheHelper.setCache(req.url, JSON.stringify(cart));
+
 
      return cart;
     }
     
 
-    async list () {
+    async list (req) {
     }
 
     async add (params) {
@@ -147,7 +155,7 @@ class cartProductRepository extends Interface(baseRepository) {
         }
     }
 
-    async getTotalAmountCart (id) {
+    async getTotalAmountCart (req, id) {
         await this.sequelize.query(
             `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`,
             { raw: true }
