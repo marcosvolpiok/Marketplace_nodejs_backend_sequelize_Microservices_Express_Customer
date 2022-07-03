@@ -1,6 +1,6 @@
 const Interface = require('es6-interface');
 const baseRepository = require('./baseRepository');
-const { createClient } = require("redis");
+const cacheHelper = require('../helpers/cacheHelper');
 
 class shopRepository extends Interface(baseRepository) {
     constructor(Shop, Sequelize, sequelize) {
@@ -12,22 +12,15 @@ class shopRepository extends Interface(baseRepository) {
         
     }
 
-    async list () {
-        
-        // Connecting to redis
-        const client = await createClient({
-            host: "172.17.0.1",
-            port: 6379
-        });
-        await client.connect();
+    async list () { }
 
-        
-        const reply = await client.get('shops');
-        if(reply){
-            return JSON.parse(reply);
+    async list2 (req) {
+        const cache = await cacheHelper.getCache(req.url);
+        if(cache){
+            return JSON.parse(cache);
         } else {
             const shop = await this.Shop.findAll({ attributes: ['id', 'name'] });
-            await client.set('shops', JSON.stringify(shop));
+            cacheHelper.setCache(req.url, JSON.stringify(shop))
 
             return shop;
         }
