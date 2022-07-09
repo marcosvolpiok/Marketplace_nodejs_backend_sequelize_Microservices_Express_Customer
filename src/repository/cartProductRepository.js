@@ -16,7 +16,7 @@ class cartProductRepository extends Interface(baseRepository) {
     }
 
     async listById (req, idCart) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -30,7 +30,7 @@ class cartProductRepository extends Interface(baseRepository) {
             { model: this.Product, as: 'product' }
         ],
      });
-     cacheHelper.setCache(req.url, JSON.stringify(cart));
+     cacheClient.setCache(req.url, JSON.stringify(cart));
 
 
      return cart;

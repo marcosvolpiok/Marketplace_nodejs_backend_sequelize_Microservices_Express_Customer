@@ -27,7 +27,7 @@ listByShop = async (req, res) => {
     const product=await this.productService.listByShop(req, res);
     res.json(product);
   }catch(e){
-    res.status(500).json({message: e.message})
+    res.status(500).json({message: e.message, stack: e.stack})
   }
 }
 

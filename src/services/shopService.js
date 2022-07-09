@@ -4,7 +4,7 @@ class shopService {
       }
     
       list = async (req, res) => {
-          const shop=await this.shopRepository.list2(req);
+          const shop=await this.shopRepository.list(req);
           
           return shop;
       }

@@ -16,7 +16,7 @@ class orderRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -26,7 +26,7 @@ class orderRepository extends Interface(baseRepository) {
                 { model: this.Shop, as: 'shop' }
             ]
         });
-        cacheHelper.setCache(req.url, JSON.stringify(order));
+        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
@@ -37,7 +37,7 @@ class orderRepository extends Interface(baseRepository) {
 
     async listByIdCustomer (req, res)
     {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -51,7 +51,7 @@ class orderRepository extends Interface(baseRepository) {
                 id_customer: res.userData.idCustomer
             }
         });
-        cacheHelper.setCache(req.url, JSON.stringify(order));
+        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
@@ -60,7 +60,7 @@ class orderRepository extends Interface(baseRepository) {
     
     async listByIdShop (req, res)
     {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -74,14 +74,14 @@ class orderRepository extends Interface(baseRepository) {
                 { model: this.OrderState, as: 'orderState' },
             ],
         });
-        cacheHelper.setCache(req.url, JSON.stringify(order));
+        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
 
     async listById (req, id, res)
     {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -100,7 +100,7 @@ class orderRepository extends Interface(baseRepository) {
                 id: id
               }
         });
-        cacheHelper.setCache(req.url, JSON.stringify(order));
+        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }

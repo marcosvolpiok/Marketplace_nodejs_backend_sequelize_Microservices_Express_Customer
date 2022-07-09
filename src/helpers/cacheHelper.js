@@ -1,22 +1,51 @@
-const { createClient } = require("redis");
 
-const getClient = async () => {
-    await createClient({
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT
-    });
-    return client.connect();
+class cacheHelper{
+
+
+    constructor(createClientOb) {
+        //this.ccc = require('redis');
+
+      this.createClientOb = createClientOb;
+      //this.client = this.createClient.getClient();
+      this.clientConnectionInstance = null;
+      this.clientConnectionInstance = this.getClientConnectionInstance();
+    }
+
+
+
+    getClientConnection = async () => {
+        const connection = await this.createClientOb({
+            //host: process.env.REDIS_HOST,
+            //port: process.env.REDIS_PORT
+            host: "172.17.0.2",
+            port: 6379
+        });
+        await connection.connect();
+
+        return connection;
+    }
+
+    getClientConnectionInstance = async () => {
+        if(this.clientConnectionInstance == null) {
+            console.log('Es null');
+            this.clientConnectionInstance = await this.getClientConnection();
+        }else{
+            console.log('NO es null')
+        }
+
+        return this.clientConnectionInstance;
+    }
+
+    getCache = async (key) => {
+       const connection_instance = await this.getClientConnectionInstance();
+       
+       return await connection_instance.get(key);
+    }
+
+    setCache = async (key, value) => {
+        const connection_instance = await this.getClientConnectionInstance();
+        connection_instance.set(key, value);
+    }
 }
 
-const getCache = async (client, key) => {
-    return await client.get(key);
-}
-
-const setCache = async (client, key, value) => {
-    client.set(key, value);
-}
-
-
-
-
-module.exports = {getCache, setCache};
+module.exports = {cacheHelper};

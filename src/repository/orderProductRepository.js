@@ -15,19 +15,19 @@ class orderProductRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const OrderProduct = await this.OrderProduct.findAll();
-        cacheHelper.setCache(req.url, JSON.stringify(OrderProduct));
+        cacheClient.setCache(req.url, JSON.stringify(OrderProduct));
 
         return OrderProduct;
     }
 
     async listById (req, id) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -42,7 +42,7 @@ class orderProductRepository extends Interface(baseRepository) {
             
         ],
         });
-        cacheHelper.setCache(req.url, JSON.stringify(OrderProduct));
+        cacheClient.setCache(req.url, JSON.stringify(OrderProduct));
         
         return OrderProduct;
     }

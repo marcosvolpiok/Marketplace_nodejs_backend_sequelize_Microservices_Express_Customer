@@ -12,7 +12,7 @@ class customerRepository extends Interface(baseRepository) {
     }
 
     async listByIdUser (req, idUser) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -22,42 +22,42 @@ class customerRepository extends Interface(baseRepository) {
                 id: idUser 
             }
         });
-        cacheHelper.setCache(req.url, JSON.stringify(customer));
+        cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
     
 
     async list (req) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const customer = await this.Customer.findAll();
-        cacheHelper.setCache(req.url, JSON.stringify(customer));
+        cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
     async find (req, params) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
         const customer = await this.Customer.findAll(params);
-        cacheHelper.setCache(req.url, JSON.stringify(customer));
+        cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
     async findOne (req, params) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
         const customer = await this.Customer.findOne(params);
-        cacheHelper.setCache(req.url, JSON.stringify(customer));
+        cacheClient.setCache(req.url, JSON.stringify(customer));
         
         return customer;
     }

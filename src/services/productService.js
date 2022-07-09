@@ -16,7 +16,7 @@ class productService {
     }
 
     listByShop = async (req, res) => {
-        const product=await this.productRepository.listByShop(req.params.id);
+        const product=await this.productRepository.listByShop(req);
         
         return product;
     }

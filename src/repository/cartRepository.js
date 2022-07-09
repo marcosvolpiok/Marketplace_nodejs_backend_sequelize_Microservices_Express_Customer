@@ -13,19 +13,19 @@ class cartRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const cart = await this.Cart.findAll({ attributes: ['id']  });
-        cacheHelper.setCache(req.url, JSON.stringify(cart));
+        cacheClient.setCache(req.url, JSON.stringify(cart));
          
         return cart;
     }
 
     async listByIdUser (req, res) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -38,13 +38,13 @@ class cartRepository extends Interface(baseRepository) {
                 { model: this.Shop, as: 'shop' }
             ],
         });
-        cacheHelper.setCache(req.url, JSON.stringify(cart));
+        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }
 
     async listByIdUserAndIdShop (req, idCustomer, idShop, state, res) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -59,19 +59,19 @@ class cartRepository extends Interface(baseRepository) {
             { model: this.Shop, as: 'shop' }
         ],
         });
-        cacheHelper.setCache(req.url, JSON.stringify(cart));
+        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }
 
     async listById (req, id) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
         
         const cart = await this.Cart.findByPk(id);
-        cacheHelper.setCache(req.url, JSON.stringify(cart));
+        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }

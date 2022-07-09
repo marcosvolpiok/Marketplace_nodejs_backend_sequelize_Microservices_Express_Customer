@@ -13,7 +13,7 @@ class productRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -23,32 +23,32 @@ class productRepository extends Interface(baseRepository) {
                 { model: this.Image, as: 'image' }
             ]
         });
-        cacheHelper.setCache(req.url, JSON.stringify(product));
+        cacheClient.setCache(req.url, JSON.stringify(product));
 
         return product;
     }
 
     async listByShop (req, idShop) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const product = await this.Product.findAll({ attributes: ['id', 'name', 'description', 'created_at', 'updated_at'],
             where: {
-                id_shop: idShop
+                id_shop: req.params.id
             },
             include: [
                 { model: this.Image, as: 'image' }
             ]
         });
-        cacheHelper.setCache(req.url, JSON.stringify(product));
+        this.cacheClient.setCache(req.url, JSON.stringify(product));
 
         return product;
     }
 
     async listById (req, id) {
-        const cache = await cacheHelper.getCache(req.url);
+        const cache = await cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -61,7 +61,7 @@ class productRepository extends Interface(baseRepository) {
             { model: this.Image, as: 'image' }
         ]
         });
-        cacheHelper.setCache(req.url, JSON.stringify(product));
+        cacheClient.setCache(req.url, JSON.stringify(product));
 
         return product;
     }

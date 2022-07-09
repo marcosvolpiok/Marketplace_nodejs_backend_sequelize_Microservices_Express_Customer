@@ -1,7 +1,11 @@
 const bcrypt = require('bcrypt');
+const { createClient } = require("redis");
 const loginHelper = require('../helpers/loginHelper');
-const cacheHelper = require('../helpers/cacheHelper')
-const cacheClient = cacheHelper.getClient();
+const { cacheHelper } = require('../helpers/cacheHelper');
+//const clientOb = createClient.getClient();
+const cacheHelperOb = new cacheHelper(createClient);
+
+
 
 const shopController = require('../controllers/shopController');
 const productController = require('../controllers/productController');
@@ -34,35 +38,35 @@ const orderStateService = require('../services/orderStateService');
 
 const {Shop, Product, Image, Cart, CartProduct, Order, OrderProduct, Customer, OrderState, Sequelize, sequelize} = require('../models');
 
-const shopRepositoryOb=new shopRepository(Shop, Sequelize, sequelize, cacheClient);
+const shopRepositoryOb=new shopRepository(Shop, Sequelize, sequelize, cacheHelperOb);
 const shopServiceOb = new shopService(shopRepositoryOb);
 const shopControllerOb = new shopController(shopServiceOb);
 
-const productRepositoryOb=new productRepository(Product, Image, Sequelize, sequelize, cacheClient);
+const productRepositoryOb=new productRepository(Product, Image, Sequelize, sequelize, cacheHelperOb);
 const productServiceOb = new productService(productRepositoryOb);
 const productControllerOb = new productController(productServiceOb);
 
-const cartRepositoryOb=new cartRepository(Cart, Shop, Sequelize, sequelize, cacheClient);
+const cartRepositoryOb=new cartRepository(Cart, Shop, Sequelize, sequelize, cacheHelperOb);
 const cartServiceOb = new cartService(cartRepositoryOb);
 const cartControllerOb = new cartController(cartServiceOb);
 
-const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop, Product, Sequelize, sequelize, cacheClient);
+const cartProductRepositoryOb=new cartProductRepository(CartProduct, Cart, Shop, Product, Sequelize, sequelize, cacheHelperOb);
 const cartProductServiceOb = new cartProductService(cartProductRepositoryOb);
 const cartProductControllerOb = new cartProductController(cartProductServiceOb);
 
-const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Product, Shop, Sequelize, sequelize, cacheClient);
+const orderProductRepositoryOb=new orderProductRepository(Order, OrderProduct, Product, Shop, Sequelize, sequelize, cacheHelperOb);
 const orderProductServiceOb = new orderProductService(orderProductRepositoryOb);
 const orderProductControllerOb = new orderProductController(orderProductServiceOb);
 
-const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Customer, OrderState, Sequelize, sequelize, cacheClient);
+const orderRepositoryOb=new orderRepository(Order, OrderProduct, Shop, Customer, OrderState, Sequelize, sequelize, cacheHelperOb);
 const orderServiceOb = new orderService(orderRepositoryOb, orderProductRepositoryOb, cartRepositoryOb, cartProductRepositoryOb);
 const orderControllerOb = new orderController(orderServiceOb);
 
-const customerRepositoryOb=new customerRepository(Customer, Sequelize, sequelize, cacheClient);
+const customerRepositoryOb=new customerRepository(Customer, Sequelize, sequelize, cacheHelperOb);
 const customerServiceOb = new customerService(customerRepositoryOb, bcrypt, loginHelper);
 const customerControllerOb = new customerController(customerServiceOb);
 
-const orderStateRepositoryOb=new orderStateRepository(OrderState, Sequelize, sequelize, cacheClient);
+const orderStateRepositoryOb=new orderStateRepository(OrderState, Sequelize, sequelize, cacheHelperOb);
 const orderStateServiceOb = new orderStateService(orderStateRepositoryOb, bcrypt, loginHelper);
 const orderStateControllerOb = new orderStateController(orderStateServiceOb);
 
