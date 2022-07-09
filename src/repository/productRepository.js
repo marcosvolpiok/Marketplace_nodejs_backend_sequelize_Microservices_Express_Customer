@@ -13,7 +13,7 @@ class productRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -23,7 +23,7 @@ class productRepository extends Interface(baseRepository) {
                 { model: this.Image, as: 'image' }
             ]
         });
-        cacheClient.setCache(req.url, JSON.stringify(product));
+        this.cacheClient.setCache(req.url, JSON.stringify(product));
 
         return product;
     }
@@ -48,20 +48,20 @@ class productRepository extends Interface(baseRepository) {
     }
 
     async listById (req, id) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
         
         const product = await this.Product.findOne({
             where:{
-                id: id
+                id: req.params.id
             },
             include: [
             { model: this.Image, as: 'image' }
         ]
         });
-        cacheClient.setCache(req.url, JSON.stringify(product));
+        this.cacheClient.setCache(req.url, JSON.stringify(product));
 
         return product;
     }

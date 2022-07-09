@@ -4,13 +4,13 @@ class productService {
       }
     
       list = async (req, res) => {
-          const product=await this.productRepository.list();
+          const product=await this.productRepository.list(req);
           
           return product;
       }
 
       listById = async (req, res) => {
-        const product=await this.productRepository.listById(req.params.id);
+        const product=await this.productRepository.listById(req);
         
         return product;
     }

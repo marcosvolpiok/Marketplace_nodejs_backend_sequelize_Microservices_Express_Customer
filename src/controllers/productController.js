@@ -5,7 +5,7 @@ class productController{
 
   list = async (req, res) => {
     try{
-      const product=await this.productService.list();
+      const product=await this.productService.list(req);
       res.json(product);
     }catch(e){
       res.status(500).json({message: e.message})
