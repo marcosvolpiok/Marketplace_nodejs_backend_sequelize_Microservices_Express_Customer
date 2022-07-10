@@ -52,14 +52,8 @@ class cartRepository extends Interface(baseRepository) {
         return cart;
     }
 
-    async listById (req, id) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-        
+    async listById (id) {
         const cart = await this.Cart.findByPk(id);
-        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }

@@ -16,7 +16,7 @@ class orderRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -26,7 +26,7 @@ class orderRepository extends Interface(baseRepository) {
                 { model: this.Shop, as: 'shop' }
             ]
         });
-        cacheClient.setCache(req.url, JSON.stringify(order));
+        this.cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
@@ -35,13 +35,8 @@ class orderRepository extends Interface(baseRepository) {
         
     }
 
-    async listByIdCustomer (req, res)
+    async listByIdCustomer (res)
     {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
         const order = await this.Order.findAll({
             include: [
                 { model: this.Shop, as: 'shop' },
@@ -51,20 +46,14 @@ class orderRepository extends Interface(baseRepository) {
                 id_customer: res.userData.idCustomer
             }
         });
-        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
 
 
     
-    async listByIdShop (req, res)
+    async listByIdShop (res)
     {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
         const order = await this.Order.findAll({
             where: {
                 id_shop: res.userData.idShop
@@ -74,12 +63,11 @@ class orderRepository extends Interface(baseRepository) {
                 { model: this.OrderState, as: 'orderState' },
             ],
         });
-        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
 
-    async listById (req, id, res)
+    async listById (id, res)
     {
         const order = await this.Order.findOne({
             include: [

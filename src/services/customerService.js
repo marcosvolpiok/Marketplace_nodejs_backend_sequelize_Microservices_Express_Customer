@@ -29,7 +29,8 @@ class cartProductService {
             password: hashPassword,
             mail: req.body.mail,
             address: req.body.address,
-            phone: req.body.phone
+            phone: req.body.phone,
+            id_shop: req.body.id_shop
         });
         
         return customer;

@@ -5,7 +5,7 @@ class orderController{
 
   list = async (req, res) => { 
     try{
-      const order=await this.orderService.list();
+      const order=await this.orderService.list(req);
       res.json(order);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -34,7 +34,7 @@ class orderController{
 
   listByIdShop = async (req, res) => { 
     try{
-      const order=await this.orderService.listByIdShop(req, res);
+      const order=await this.orderService.listByIdShop(res);
       res.json(order);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -47,7 +47,7 @@ class orderController{
       const order=await this.orderService.listById(req, res);
       res.json(order);
     }catch(e){
-      res.status(500).json({message: e.message})
+      res.status(500).json({message: e.message,  stack: e.stack})
       console.log(e)
     }
   }

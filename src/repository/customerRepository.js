@@ -61,7 +61,8 @@ class customerRepository extends Interface(baseRepository) {
             password: params.password,
             mail: params.mail,
             address: params.address,
-            phone: params.phone
+            phone: params.phone,
+            id_shop: params.id_shop
         });
 
         return customerNew;

@@ -37,9 +37,10 @@ router.put('/order/byCart/', checkAuth, orderControllerOb.addFromCart);
 router.get('/order/customer/', checkAuth, orderControllerOb.listByIdCustomer);
 router.get('/order/shop/', checkAuth, orderControllerOb.listByIdShop);
 router.get('/order/:id/:hash', checkAuth, orderControllerOb.listById);
-router.patch('/order/:id/', checkAuth, orderControllerOb.update);
 
 router.get('/order/product/:id', checkAuth, orderProductControllerOb.listById);
+
+router.patch('/order/:id/', checkAuth, orderControllerOb.update);
 
 router.get('/customer/', checkAuth, customerControllerOb.list);
 router.put('/customer/', checkAuth, customerControllerOb.add);

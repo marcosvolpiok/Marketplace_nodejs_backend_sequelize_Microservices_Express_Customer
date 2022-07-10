@@ -148,7 +148,7 @@ class cartProductRepository extends Interface(baseRepository) {
         }
     }
 
-    async getTotalAmountCart (req, id) {
+    async getTotalAmountCart (id) {
         await this.sequelize.query(
             `SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))`,
             { raw: true }

@@ -7,8 +7,8 @@ class orderService {
         this.sha1 = require('js-sha1');
       }
       
-    list = async (req, res) => {
-        const order=await this.orderRepository.list();
+    list = async (req) => {
+        const order=await this.orderRepository.list(req);
           
         return order;
     }
@@ -59,7 +59,7 @@ class orderService {
         return order;
     }
 
-    listByIdShop = async (req, res) => {
+    listByIdShop = async (res) => {
         const order=await this.orderRepository.listByIdShop(res);
         order.forEach((ord, index)=>{
             order[index].dataValues.hash = this.sha1(ord.id + '_SALT_NYAN');
