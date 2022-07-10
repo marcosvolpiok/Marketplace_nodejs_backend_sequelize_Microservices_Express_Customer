@@ -27,10 +27,7 @@ class cacheHelper{
 
     getClientConnectionInstance = async () => {
         if(this.clientConnectionInstance == null) {
-            console.log('Es null');
             this.clientConnectionInstance = await this.getClientConnection();
-        }else{
-            console.log('NO es null')
         }
 
         return this.clientConnectionInstance;
