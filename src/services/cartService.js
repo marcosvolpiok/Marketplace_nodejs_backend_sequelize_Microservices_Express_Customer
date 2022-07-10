@@ -4,7 +4,7 @@ class cartService {
       }
       
       list = async (req, res) => {
-          const cart=await this.cartRepository.list();
+          const cart=await this.cartRepository.list(req);
           
           return cart;
       }

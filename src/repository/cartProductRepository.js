@@ -15,12 +15,7 @@ class cartProductRepository extends Interface(baseRepository) {
         
     }
 
-    async listById (req, idCart) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
+    async listById (idCart) {
         const cart = await this.CartProduct.findAll({ attributes: ['id', 'id_cart', 'id_product', 'quantity'],
         where: {
             id_cart: idCart 
@@ -30,8 +25,6 @@ class cartProductRepository extends Interface(baseRepository) {
             { model: this.Product, as: 'product' }
         ],
      });
-     cacheClient.setCache(req.url, JSON.stringify(cart));
-
 
      return cart;
     }

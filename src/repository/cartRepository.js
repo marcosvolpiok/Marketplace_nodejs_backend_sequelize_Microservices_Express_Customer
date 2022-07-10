@@ -13,23 +13,18 @@ class cartRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const cart = await this.Cart.findAll({ attributes: ['id']  });
-        cacheClient.setCache(req.url, JSON.stringify(cart));
+        this.cacheClient.setCache(req.url, JSON.stringify(cart));
          
         return cart;
     }
 
-    async listByIdUser (req, res) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
+    async listByIdUser (res) {
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
             where: {
                 id_customer: res.userData.idCustomer 
@@ -38,17 +33,11 @@ class cartRepository extends Interface(baseRepository) {
                 { model: this.Shop, as: 'shop' }
             ],
         });
-        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }
 
-    async listByIdUserAndIdShop (req, idCustomer, idShop, state, res) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
+    async listByIdUserAndIdShop (idCustomer, idShop, state, res) {
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
             id_customer: res.userData.idCustomer,
@@ -59,7 +48,6 @@ class cartRepository extends Interface(baseRepository) {
             { model: this.Shop, as: 'shop' }
         ],
         });
-        cacheClient.setCache(req.url, JSON.stringify(cart));
 
         return cart;
     }

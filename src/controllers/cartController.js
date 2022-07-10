@@ -5,7 +5,7 @@ class cartController{
 
   list = async (req, res) => { 
     try{
-      const cart=await this.cartService.list();
+      const cart=await this.cartService.list(req);
       res.json(cart);
     }catch(e){
       res.status(500).json({message: e.message})

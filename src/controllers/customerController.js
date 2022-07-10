@@ -5,7 +5,7 @@ class customerController{
 
   list = async (req, res) => { 
     try{
-      const customer=await this.customerService.list();
+      const customer=await this.customerService.list(req);
       res.json(customer);
     }catch(e){
       res.status(500).json({message: e.message})
@@ -26,7 +26,7 @@ class customerController{
       const customer=await this.customerService.add(req);
       res.json(customer);
     }catch(e){
-      res.status(500).json({message: e.message})
+      res.status(500).json({message: e.message, stack: e.stack})
     }
   }  
 

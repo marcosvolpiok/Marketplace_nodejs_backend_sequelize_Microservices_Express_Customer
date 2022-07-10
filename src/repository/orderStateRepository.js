@@ -12,13 +12,7 @@ class orderStateRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
         const orderState = await this.OrderState.findAll();
-        cacheClient.setCache(req.url, JSON.stringify(orderState));
 
         return orderState;
     }

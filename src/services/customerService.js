@@ -6,7 +6,7 @@ class cartProductService {
     }
       
     list = async (req, res) => {
-          const customer=await this.customerRepository.list();
+          const customer=await this.customerRepository.list(req);
           
           return customer;
     }

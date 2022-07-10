@@ -12,7 +12,7 @@ class customerRepository extends Interface(baseRepository) {
     }
 
     async listByIdUser (req, idUser) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
@@ -22,48 +22,39 @@ class customerRepository extends Interface(baseRepository) {
                 id: idUser 
             }
         });
-        cacheClient.setCache(req.url, JSON.stringify(customer));
+        this.cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
     
 
     async list (req) {
-        const cache = await cacheClient.getCache(req.url);
+        const cache = await this.cacheClient.getCache(req.url);
         if(cache){
             return JSON.parse(cache);
         }
 
         const customer = await this.Customer.findAll();
-        cacheClient.setCache(req.url, JSON.stringify(customer));
+        this.cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
-    async find (req, params) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
+    async find (params) {
         const customer = await this.Customer.findAll(params);
-        cacheClient.setCache(req.url, JSON.stringify(customer));
 
         return customer;
     }
 
-    async findOne (req, params) {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
+    async findOne (params) {
         const customer = await this.Customer.findOne(params);
-        cacheClient.setCache(req.url, JSON.stringify(customer));
         
         return customer;
     }
     
 
     async add (params) {
+        
         const customerNew = await this.Customer.create({
             first_name: params.first_name,
             last_name: params.last_name,

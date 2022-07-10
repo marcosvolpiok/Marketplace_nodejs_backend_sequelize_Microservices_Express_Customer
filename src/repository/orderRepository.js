@@ -81,11 +81,6 @@ class orderRepository extends Interface(baseRepository) {
 
     async listById (req, id, res)
     {
-        const cache = await cacheClient.getCache(req.url);
-        if(cache){
-            return JSON.parse(cache);
-        }
-
         const order = await this.Order.findOne({
             include: [
                 { model: this.Customer, as: 'customer' },
@@ -100,7 +95,6 @@ class orderRepository extends Interface(baseRepository) {
                 id: id
               }
         });
-        cacheClient.setCache(req.url, JSON.stringify(order));
 
         return order;
     }
