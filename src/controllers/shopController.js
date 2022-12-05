@@ -4,7 +4,6 @@ class shopController{
   }
 
   list = async (req, res) => { 
-    //res.json([{'name': 'mikona', 'id': 1234}, {'name': 'misoni', 'id': 4567}]);
     try{
       const shop=await this.shopService.list(req);
       res.json(shop);
