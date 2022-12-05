@@ -12,8 +12,10 @@ class shopRepository extends Interface(baseRepository) {
     }
 
     async list (req) {
+        console.log('reqq fom Repository:::: ' + req.url)
         const cache = await this.cacheClient.getCache(req.url);
         if(cache){
+            console.log('Return cache', cache)
             return JSON.parse(cache);
         }
         const shop = await this.Shop.findAll({ attributes: ['id', 'name'] });

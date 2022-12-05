@@ -71,5 +71,6 @@ const orderStateServiceOb = new orderStateService(orderStateRepositoryOb, bcrypt
 const orderStateControllerOb = new orderStateController(orderStateServiceOb);
 
 module.exports = {
-    Sequelize, sequelize, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb, orderStateControllerOb
+    Sequelize, sequelize, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb, orderStateControllerOb,
+    shopRepositoryOb
 };
