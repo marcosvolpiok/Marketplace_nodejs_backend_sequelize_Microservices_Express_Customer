@@ -1,5 +1,5 @@
 const {
-  shopServiceOb, productServiceOb, customerServiceOb
+  shopServiceOb, productServiceOb, customerServiceOb, cartServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -29,7 +29,13 @@ const resolvers = {
     async getCustomer(root, args, context) {
       context.req.url = `getCustomers`;
       return await customerServiceOb.list(context.req);
-    },   
+    },  
+    
+    async getCart() {
+      req = {};
+      req.url = 'getCart';
+      return await cartServiceOb.list(req);
+    },
   },
 
   Mutation: {

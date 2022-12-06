@@ -10,7 +10,9 @@ const typeDefs = `
     getProductById(id: ID): Product,
     getProductByShop(id: ID): [Product]
 
-    getCustomer: [Customer]
+    getCustomer: [Customer],
+
+    getCart: [Cart]
   }
 
   type Mutation {
@@ -59,6 +61,10 @@ const typeDefs = `
     message: String
     user: Customer,
     token: String
+  }
+
+  type Cart {
+    id: ID
   }
 
   input CustomerInput {
