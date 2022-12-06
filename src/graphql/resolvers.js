@@ -17,7 +17,7 @@ const resolvers = {
     async getProductById(root, {id}, context) {
       context.req.params.id = id;
       context.req.url = `getProductById/${id}`;
-      return await productRepositoryOb.listById(context.req);
+      return await productServiceOb.listById(context.req);
     },
 
     async getProductByShop(root, {id}, context) {
