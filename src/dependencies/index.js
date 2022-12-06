@@ -72,5 +72,5 @@ const orderStateControllerOb = new orderStateController(orderStateServiceOb);
 
 module.exports = {
     Sequelize, sequelize, shopControllerOb, productControllerOb, cartControllerOb, cartProductControllerOb, orderControllerOb, orderProductControllerOb, customerControllerOb, orderStateControllerOb,
-    shopRepositoryOb
+    shopRepositoryOb, productRepositoryOb
 };
