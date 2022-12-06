@@ -28,7 +28,7 @@ const resolvers = {
     
     async getCustomer(root, args, context) {
       context.req.url = `getCustomers`;
-      return await customerRepositoryOb.list(context.req);
+      return await customerServiceOb.list(context.req);
     },   
   },
 
