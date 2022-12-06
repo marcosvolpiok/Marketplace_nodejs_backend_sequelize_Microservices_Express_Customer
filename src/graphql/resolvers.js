@@ -1,5 +1,5 @@
 const {
-  shopServiceOb, productRepositoryOb, customerServiceOb
+  shopServiceOb, productServiceOb, productRepositoryOb, customerServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -11,7 +11,7 @@ const resolvers = {
 
     async getProduct(root, args, context) {
       context.req.url = 'getProducts';
-      return await productRepositoryOb.list(context.req);
+      return await productServiceOb.list(context.req);
     },
 
     async getProductById(root, {id}, context) {
