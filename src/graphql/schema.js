@@ -16,7 +16,9 @@ const typeDefs = `
   }
 
   type Product {
-    id: ID
+    id: ID,
+    id_shop: ID,
+    price: String,
     name: String,
     description: String,
     created_at: DateTime,
