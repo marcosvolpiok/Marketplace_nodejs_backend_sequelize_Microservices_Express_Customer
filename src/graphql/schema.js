@@ -13,6 +13,10 @@ const typeDefs = `
     getCustomer: [Customer]
   }
 
+  type Mutation {
+    createCustomer(input: CustomerInput): Customer
+  }
+
   type Shop {
     id: ID
     name: String
@@ -45,7 +49,19 @@ const typeDefs = `
     address: String,
     phone: String,
     updatedAt: DateTime,
-    createdAt: DateTime
+    createdAt: DateTime,
+    status: String,
+    message: String
+  }
+
+  input CustomerInput {
+    first_name: String!,
+    last_name: String!,
+    password: String!,
+    mail: String!,
+    address: String!,
+    phone: String!,
+    id_shop: Int
   }
 
   scalar DateTime

@@ -1,5 +1,5 @@
 const {
-  shopRepositoryOb, productRepositoryOb, customerRepositoryOb
+  shopRepositoryOb, productRepositoryOb, customerServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -29,10 +29,15 @@ const resolvers = {
     async getCustomer(root, args, context) {
       context.req.url = `getCustomers`;
       return await customerRepositoryOb.list(context.req);
-    },
-    
-    
+    },   
   },
+
+  Mutation: {
+    async createCustomer(_, { input }) {
+      req = {body: input};
+      return await customerServiceOb.add(req);
+    },
+  }   
 }
 
 module.exports = resolvers
