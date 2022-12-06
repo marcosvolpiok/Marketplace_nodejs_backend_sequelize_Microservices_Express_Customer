@@ -13,6 +13,12 @@ const resolvers = {
       context.req.url = 'getProducts';
       return await productRepositoryOb.list(context.req);
     },
+
+    async getProductById(root, {id}, context) {
+      context.req.params.id = id;
+      context.req.url = `getProductById/${id}`;
+      return await productRepositoryOb.listById(context.req);
+    },
   },
 }
 

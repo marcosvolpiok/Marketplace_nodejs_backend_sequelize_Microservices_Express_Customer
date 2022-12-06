@@ -6,6 +6,7 @@ const typeDefs = `
   type Query {
     getShop: [Shop],
     getProduct: [Product],
+    getProductById(id: ID): Product
   }
 
   type Shop {
