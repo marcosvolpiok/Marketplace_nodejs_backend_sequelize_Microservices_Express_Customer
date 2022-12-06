@@ -37,6 +37,11 @@ const resolvers = {
       req = {body: input};
       return await customerServiceOb.add(req);
     },
+
+    async loginCustomer(_, { input }) {
+      req = {body: input};
+      return await customerServiceOb.login(req);
+    },    
   }   
 }
 

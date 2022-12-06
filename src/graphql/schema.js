@@ -15,6 +15,7 @@ const typeDefs = `
 
   type Mutation {
     createCustomer(input: CustomerInput): Customer
+    loginCustomer(input: CustomerLoginInput): CustomerLogin
   }
 
   type Shop {
@@ -54,6 +55,12 @@ const typeDefs = `
     message: String
   }
 
+  type CustomerLogin {
+    message: String
+    user: Customer,
+    token: String
+  }
+
   input CustomerInput {
     first_name: String!,
     last_name: String!,
@@ -62,6 +69,11 @@ const typeDefs = `
     address: String!,
     phone: String!,
     id_shop: Int
+  }
+
+  input CustomerLoginInput {
+    mail: String!,
+    password: String!
   }
 
   scalar DateTime
