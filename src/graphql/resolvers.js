@@ -1,5 +1,5 @@
 const {
-  shopRepositoryOb, productRepositoryOb
+  shopRepositoryOb, productRepositoryOb, customerRepositoryOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -24,7 +24,14 @@ const resolvers = {
       context.req.params.id = id;
       context.req.url = `getProductByShop/${id}`;
       return await productRepositoryOb.listByShop(context.req);
-    },    
+    },
+    
+    async getCustomer(root, args, context) {
+      context.req.url = `getCustomers`;
+      return await customerRepositoryOb.list(context.req);
+    },
+    
+    
   },
 }
 

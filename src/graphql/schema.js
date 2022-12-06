@@ -5,9 +5,12 @@ const { DateTime } = require('graphql-iso-date')
 const typeDefs = `
   type Query {
     getShop: [Shop],
+    
     getProduct: [Product],
     getProductById(id: ID): Product,
     getProductByShop(id: ID): [Product]
+
+    getCustomer: [Customer]
   }
 
   type Shop {
@@ -32,6 +35,19 @@ const typeDefs = `
     created_at: DateTime
   }
   
+  type Customer {
+    id: ID,
+    id_shop: ID,
+    first_name: String,
+    last_name: String,
+    password: String,
+    mail: String,
+    address: String,
+    phone: String,
+    updatedAt: DateTime,
+    createdAt: DateTime
+  }
+
   scalar DateTime
 `
 
