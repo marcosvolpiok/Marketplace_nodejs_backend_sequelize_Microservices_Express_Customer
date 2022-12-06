@@ -23,7 +23,7 @@ const resolvers = {
     async getProductByShop(root, {id}, context) {
       context.req.params.id = id;
       context.req.url = `getProductByShop/${id}`;
-      return await productRepositoryOb.listByShop(context.req);
+      return await productServiceOb.listByShop(context.req);
     },
     
     async getCustomer(root, args, context) {
