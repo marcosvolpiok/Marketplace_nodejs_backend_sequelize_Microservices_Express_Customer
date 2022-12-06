@@ -1,5 +1,5 @@
 const {
-  shopServiceOb, productServiceOb, productRepositoryOb, customerServiceOb
+  shopServiceOb, productServiceOb, customerServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
