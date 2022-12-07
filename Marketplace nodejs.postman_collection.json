@@ -836,9 +836,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -850,7 +847,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -862,7 +859,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/order//{{order_id}}",
+							"raw": "http://localhost:{{port}}/order/{{order_id}}",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -870,7 +867,6 @@
 							"port": "{{port}}",
 							"path": [
 								"order",
-								"",
 								"{{order_id}}"
 							],
 							"query": [
