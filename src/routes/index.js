@@ -31,7 +31,6 @@ router.delete('/cart/product/', cartProductControllerOb.delete);
 router.patch('/cart/product/', cartProductControllerOb.update);
 
 router.get('/order/', orderControllerOb.list);
-router.put('/order/', orderControllerOb.addFromCart);
 router.put('/order/byCart/', orderControllerOb.addFromCart);
 router.get('/order/customer/', orderControllerOb.listByIdCustomer);
 router.get('/order/shop/', orderControllerOb.listByIdShop);
