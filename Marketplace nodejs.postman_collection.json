@@ -742,7 +742,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/order/shop/",
+							"raw": "http://localhost:{{port}}/order/customer/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -750,7 +750,7 @@
 							"port": "{{port}}",
 							"path": [
 								"order",
-								"shop",
+								"customer",
 								""
 							]
 						}
