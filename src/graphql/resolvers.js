@@ -40,6 +40,11 @@ const resolvers = {
       req.url = 'getCart';
       return await cartServiceOb.list(req);
     },
+
+    async getCartByUser(root, args, context) {
+      res = context.res
+      return await cartServiceOb.listByIdUser(res);
+    },
   },
 
   Mutation: {
@@ -56,7 +61,7 @@ const resolvers = {
     async addCart(_, { input }, context) {
       res = context.res;
       req = {body: input};
-      
+
       return await cartProductServiceOb.add(req, res);
     },
   }   

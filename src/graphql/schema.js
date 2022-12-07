@@ -13,6 +13,7 @@ const typeDefs = `
     getCustomer: [Customer],
 
     getCart: [Cart]
+    getCartByUser: Cart
   }
 
   type Mutation {
@@ -65,7 +66,14 @@ const typeDefs = `
   }
 
   type Cart {
-    id: ID
+    id: ID,
+    id_shop: ID,
+    shop: Shop
+  }
+
+  type Shop {
+    id: ID,
+    name: String
   }
 
   type Detail {
