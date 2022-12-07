@@ -686,7 +686,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/order/",
+							"raw": "http://localhost:{{port}}/order/byCart/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -694,6 +694,7 @@
 							"port": "{{port}}",
 							"path": [
 								"order",
+								"byCart",
 								""
 							]
 						}
