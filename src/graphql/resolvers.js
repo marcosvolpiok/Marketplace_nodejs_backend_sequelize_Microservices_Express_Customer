@@ -80,6 +80,13 @@ const resolvers = {
 
       return await cartProductServiceOb.add(req, res);
     },
+
+    async updateCart(_, { input }, context) {
+      res = context.res;
+      req = {body: input};
+
+      return await cartProductServiceOb.update(req, res);
+    },
   }   
 }
 

@@ -22,6 +22,7 @@ const typeDefs = `
     createCustomer(input: CustomerInput): Customer
     loginCustomer(input: CustomerLoginInput): CustomerLogin
     addCart(input: CartInput): Cart
+    updateCart(input: CartUpdateInput): Cart 
   }
 
   type Shop {
@@ -69,7 +70,9 @@ const typeDefs = `
 
   type Cart {
     id: ID,
+    id_cart: ID,
     id_shop: ID,
+    id_product: ID,
     shop: Shop,
     id_customer: ID,
     state: Int,
@@ -125,6 +128,11 @@ const typeDefs = `
   input CartInput {
     idProduct: ID,
     idShop: ID,
+    quantity: Int
+  }
+
+  input CartUpdateInput {
+    id: ID,
     quantity: Int
   }
 
