@@ -17,7 +17,7 @@ const typeDefs = `
     getCartByUserAndShop(idShop: Int!, state: Int!): Cart
     getCartById(idCart: ID!): [CartDetail]
 
-    getOrders: [Order]   
+    getOrder: [Order]   
   }
 
   type Mutation {

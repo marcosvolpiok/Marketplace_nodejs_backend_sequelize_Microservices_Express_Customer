@@ -64,7 +64,7 @@ const resolvers = {
       return await cartProductServiceOb.listById(req, res);
     },
 
-    async getOrders(root, args, context) {
+    async getOrder(root, args, context) {
       const req = context.req;
       req.url = 'getOrders';
 
