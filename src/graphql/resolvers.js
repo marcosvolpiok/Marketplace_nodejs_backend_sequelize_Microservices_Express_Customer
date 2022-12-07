@@ -1,9 +1,11 @@
+const req = require('express/lib/request');
 const {
   shopServiceOb,
   productServiceOb,
   customerServiceOb,
   cartServiceOb,
-  cartProductServiceOb
+  cartProductServiceOb,
+  orderServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -61,6 +63,13 @@ const resolvers = {
 
       return await cartProductServiceOb.listById(req, res);
     },
+
+    async getOrders(root, args, context) {
+      const req = context.req;
+      req.url = 'getOrders';
+
+      return await orderServiceOb.list(req);
+    }
   },
 
   Mutation: {

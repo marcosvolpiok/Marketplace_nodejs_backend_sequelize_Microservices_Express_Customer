@@ -16,6 +16,8 @@ const typeDefs = `
     getCartByUser: Cart
     getCartByUserAndShop(idShop: Int!, state: Int!): Cart
     getCartById(idCart: ID!): [CartDetail]
+
+    getOrders: [Order]
   }
 
   type Mutation {
@@ -107,6 +109,18 @@ const typeDefs = `
     quantity: Int,
     cart: [Cart],
     product: [Product]
+  }
+
+  type Order {
+    id: ID,
+    id_shop: ID,
+    id_customer: ID,
+    id_cart: ID,
+    id_state: ID,
+    total_amount: Float,
+    updated_at: DateTime,
+    created_at: DateTime,
+    shop: Shop 
   }
 
 
