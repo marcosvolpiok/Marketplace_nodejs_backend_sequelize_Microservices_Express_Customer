@@ -25,6 +25,7 @@ const typeDefs = `
     loginCustomer(input: CustomerLoginInput): CustomerLogin
     addCart(input: CartInput): Cart
     updateCart(input: CartUpdateInput): Cart 
+    createOrderFromCart(input CreateOrderFromCartInput): Order
   }
 
   type Shop {
@@ -121,6 +122,21 @@ const typeDefs = `
     updated_at: DateTime,
     created_at: DateTime,
     shop: Shop 
+  }
+
+  type Order {
+    state: String,
+    detail: String,
+    orderNew: OrderNew
+  }
+
+  type OrderNew {
+    id: ID,
+    id_shop: ID,
+    id_customer: ID,
+    id_cart: ID,
+    total_amount: String,
+    id_state: ID
   }
 
 

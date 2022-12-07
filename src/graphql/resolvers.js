@@ -96,6 +96,13 @@ const resolvers = {
 
       return await cartProductServiceOb.update(req, res);
     },
+
+    async createOrderFromCart(_, { input }, context) {
+      res = context.res;
+      req = {body: input};
+
+      return await cartProductServiceOb.update(req, res);
+    },    
   }   
 }
 
