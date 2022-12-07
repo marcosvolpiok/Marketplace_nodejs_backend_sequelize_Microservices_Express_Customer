@@ -69,6 +69,12 @@ const resolvers = {
       req.url = 'getOrders';
 
       return await orderServiceOb.list(req);
+    },
+    
+    async getOrderByCustomer(root, args, context) {
+      const res = context.res;
+
+      return await orderServiceOb.listByIdCustomer(res);
     }
   },
 

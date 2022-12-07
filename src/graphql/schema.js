@@ -18,6 +18,7 @@ const typeDefs = `
     getCartById(idCart: ID!): [CartDetail]
 
     getOrder: [Order]   
+    getOrderByCustomer: [Order]
   }
 
   type Mutation {
