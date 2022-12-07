@@ -45,6 +45,14 @@ const resolvers = {
       res = context.res
       return await cartServiceOb.listByIdUser(res);
     },
+
+    async getCartByUserAndShop(root, args, context) {
+      req = context.req;
+      req.params.idShop = args.idShop;
+      req.params.state = args.state;
+      res = context.res;
+      return await cartServiceOb.listByIdUserAndIdShop(req, res);
+    },
   },
 
   Mutation: {
