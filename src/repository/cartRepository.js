@@ -37,7 +37,7 @@ class cartRepository extends Interface(baseRepository) {
         return cart;
     }
 
-    async listByIdUserAndIdShop (idCustomer, idShop, state, res) {
+    async listByIdUserAndIdShop (idShop, state, res) {
         const cart = await this.Cart.findOne({ attributes: ['id', 'id_shop'],
         where: {
             id_customer: res.userData.idCustomer,

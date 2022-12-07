@@ -23,7 +23,7 @@ router.get('/shops/catalog/detail/:id', productControllerOb.listById);
 
 router.get('/cart/', cartControllerOb.list);
 router.get('/cart/user/', cartControllerOb.listByIdUser);
-router.get('/cart/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
+router.get('/cart/shop/:idShop/state/:state', cartControllerOb.listByIdUserAndIdShop);
 
 router.get('/cart/:idCart', cartProductControllerOb.listById);
 router.put('/cart/', cartProductControllerOb.add);
