@@ -19,6 +19,7 @@ const typeDefs = `
 
     getOrder: [Order]   
     getOrderByCustomer: [Order]
+    getOrderByShop: [Order]
   }
 
   type Mutation {

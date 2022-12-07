@@ -75,7 +75,13 @@ const resolvers = {
       const res = context.res;
 
       return await orderServiceOb.listByIdCustomer(res);
-    }
+    },
+
+    async getOrderByShop(root, args, context) {
+      const res = context.res;
+
+      return await orderServiceOb.listByIdShop(res);
+    },
   },
 
   Mutation: {
