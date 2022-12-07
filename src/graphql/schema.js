@@ -17,7 +17,7 @@ const typeDefs = `
     getCartByUserAndShop(idShop: Int!, state: Int!): Cart
     getCartById(idCart: ID!): [CartDetail]
 
-    getOrders: [Order]
+    getOrders: [Order]   
   }
 
   type Mutation {
@@ -25,7 +25,7 @@ const typeDefs = `
     loginCustomer(input: CustomerLoginInput): CustomerLogin
     addCart(input: CartInput): Cart
     updateCart(input: CartUpdateInput): Cart 
-    createOrderFromCart(input CreateOrderFromCartInput): Order
+    createOrderFromCart(input: CreateOrderFromCartInput): Order
   }
 
   type Shop {
@@ -164,6 +164,10 @@ const typeDefs = `
   input CartUpdateInput {
     id: ID,
     quantity: Int
+  }
+
+  input CreateOrderFromCartInput {
+    idCart: ID
   }
 
   scalar DateTime

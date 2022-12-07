@@ -98,10 +98,10 @@ const resolvers = {
     },
 
     async createOrderFromCart(_, { input }, context) {
-      res = context.res;
-      req = {body: input};
+      const res = context.res;
+      const req = {body: input};
 
-      return await cartProductServiceOb.update(req, res);
+      return await orderServiceOb.addFromCart(req, res);
     },    
   }   
 }
