@@ -10,6 +10,9 @@ const indexRoutes = require('./routes/index');
 const graphqlHTTP = require("express-graphql");
 const schema = require("./graphql/schema");
 
+const checkAuth = require('./middlewares/checkAuth');
+
+
 //app.use(bodyParser.json());
 app.use(express.json());
 
@@ -23,6 +26,7 @@ app.use(cors());
 // middlewares
 app.use(morgan('dev'));
 //app.use(express.urlencoded({extended: true}))
+app.use(checkAuth);
 
 
 // routes
@@ -36,12 +40,15 @@ app.use(function(err, req, res, next){
 // Graphql
 app.use(
     '/graphql',
-    graphqlHTTP.graphqlHTTP((req) => {
+    graphqlHTTP.graphqlHTTP((req, res) => {
       return {
-        graphiql: true,
+        graphiql: {        
+          headerEditorEnabled: true    
+        },
         schema,
         context: {
           req: req,
+          res: res
         }
       }
     })

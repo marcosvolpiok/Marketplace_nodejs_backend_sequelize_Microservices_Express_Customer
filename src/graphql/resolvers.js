@@ -1,5 +1,9 @@
 const {
-  shopServiceOb, productServiceOb, customerServiceOb, cartServiceOb
+  shopServiceOb,
+  productServiceOb,
+  customerServiceOb,
+  cartServiceOb,
+  cartProductServiceOb
 } = require('../dependencies/');
 
 const resolvers = {
@@ -47,7 +51,14 @@ const resolvers = {
     async loginCustomer(_, { input }) {
       req = {body: input};
       return await customerServiceOb.login(req);
-    },    
+    },  
+    
+    async addCart(_, { input }, context) {
+      res = context.res;
+      req = {body: input};
+      
+      return await cartProductServiceOb.add(req, res);
+    },
   }   
 }
 

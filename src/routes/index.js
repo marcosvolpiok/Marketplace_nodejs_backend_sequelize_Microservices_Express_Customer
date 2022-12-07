@@ -14,39 +14,38 @@ const {
     customerControllerOb,
     orderStateControllerOb
 } = require('../dependencies/');
-const checkAuth = require('../middlewares/checkAuth');
 
-router.get('/shops/', checkAuth, shopControllerOb.list);
+router.get('/shops/', shopControllerOb.list);
 
-router.get('/shops/catalog', checkAuth, productControllerOb.list);
-router.get('/shops/catalog/:id', checkAuth, productControllerOb.listByShop);
-router.get('/shops/catalog/detail/:id', checkAuth, productControllerOb.listById);
+router.get('/shops/catalog', productControllerOb.list);
+router.get('/shops/catalog/:id', productControllerOb.listByShop);
+router.get('/shops/catalog/detail/:id', productControllerOb.listById);
 
-router.get('/cart/', checkAuth, cartControllerOb.list);
-router.get('/cart/user/', checkAuth, cartControllerOb.listByIdUser);
-router.post('/cart/shop/:idShop', checkAuth, cartControllerOb.listByIdUserAndIdShop);
+router.get('/cart/', cartControllerOb.list);
+router.get('/cart/user/', cartControllerOb.listByIdUser);
+router.post('/cart/shop/:idShop', cartControllerOb.listByIdUserAndIdShop);
 
-router.get('/cart/:idCart', checkAuth, cartProductControllerOb.listById);
-router.put('/cart/', checkAuth, cartProductControllerOb.add);
-router.delete('/cart/product/', checkAuth, cartProductControllerOb.delete);
-router.patch('/cart/product/', checkAuth, cartProductControllerOb.update);
+router.get('/cart/:idCart', cartProductControllerOb.listById);
+router.put('/cart/', cartProductControllerOb.add);
+router.delete('/cart/product/', cartProductControllerOb.delete);
+router.patch('/cart/product/', cartProductControllerOb.update);
 
-router.get('/order/', checkAuth, orderControllerOb.list);
-router.put('/order/', checkAuth, orderControllerOb.addFromCart);
-router.put('/order/byCart/', checkAuth, orderControllerOb.addFromCart);
-router.get('/order/customer/', checkAuth, orderControllerOb.listByIdCustomer);
-router.get('/order/shop/', checkAuth, orderControllerOb.listByIdShop);
-router.get('/order/:id/:hash', checkAuth, orderControllerOb.listById);
+router.get('/order/', orderControllerOb.list);
+router.put('/order/', orderControllerOb.addFromCart);
+router.put('/order/byCart/', orderControllerOb.addFromCart);
+router.get('/order/customer/', orderControllerOb.listByIdCustomer);
+router.get('/order/shop/', orderControllerOb.listByIdShop);
+router.get('/order/:id/:hash', orderControllerOb.listById);
 
-router.get('/order/product/:id', checkAuth, orderProductControllerOb.listById);
+router.get('/order/product/:id', orderProductControllerOb.listById);
 
-router.patch('/order/:id/', checkAuth, orderControllerOb.update);
+router.patch('/order/:id/', orderControllerOb.update);
 
-router.get('/customer/', checkAuth, customerControllerOb.list);
-router.put('/customer/', checkAuth, customerControllerOb.add);
-router.post('/customer/login/', checkAuth, customerControllerOb.login);
+router.get('/customer/', customerControllerOb.list);
+router.put('/customer/', customerControllerOb.add);
+router.post('/customer/login/', customerControllerOb.login);
 
-router.get('/order/states/', checkAuth, orderStateControllerOb.list);
+router.get('/order/states/', orderStateControllerOb.list);
 
 
 

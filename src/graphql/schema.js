@@ -18,6 +18,7 @@ const typeDefs = `
   type Mutation {
     createCustomer(input: CustomerInput): Customer
     loginCustomer(input: CustomerLoginInput): CustomerLogin
+    addCart(input: CartInput): addCart
   }
 
   type Shop {
@@ -67,6 +68,21 @@ const typeDefs = `
     id: ID
   }
 
+  type Detail {
+    id: ID,
+    id_cart: ID
+  }
+
+  type addCart {
+    id: ID
+    id_cart: ID,
+    id_product: ID,
+    quantity: Int,
+    state: String,
+    message: String,
+    detail: Detail
+  }
+
   input CustomerInput {
     first_name: String!,
     last_name: String!,
@@ -80,6 +96,12 @@ const typeDefs = `
   input CustomerLoginInput {
     mail: String!,
     password: String!
+  }
+
+  input CartInput {
+    idProduct: ID,
+    idShop: ID,
+    quantity: Int
   }
 
   scalar DateTime
