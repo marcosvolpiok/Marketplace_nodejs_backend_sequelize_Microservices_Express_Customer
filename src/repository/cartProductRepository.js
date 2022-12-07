@@ -102,7 +102,7 @@ class cartProductRepository extends Interface(baseRepository) {
                 }
             ],
             where: {
-                'id': params.id,
+                'id_cart': params.id,
             }
         });
         
