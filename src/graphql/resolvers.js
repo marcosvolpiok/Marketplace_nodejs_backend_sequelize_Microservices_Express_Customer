@@ -53,6 +53,14 @@ const resolvers = {
       res = context.res;
       return await cartServiceOb.listByIdUserAndIdShop(req, res);
     },
+
+    async getCartById(root, args, context) {
+      req = context.req;
+      req.params.idCart = args.idCart;
+      res = context.res;
+
+      return await cartProductServiceOb.listById(req, res);
+    },
   },
 
   Mutation: {

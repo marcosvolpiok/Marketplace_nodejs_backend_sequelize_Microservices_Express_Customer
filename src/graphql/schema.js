@@ -15,12 +15,13 @@ const typeDefs = `
     getCart: [Cart]
     getCartByUser: Cart
     getCartByUserAndShop(idShop: Int!, state: Int!): Cart
+    getCartById(idCart: ID!): [CartDetail]
   }
 
   type Mutation {
     createCustomer(input: CustomerInput): Customer
     loginCustomer(input: CustomerLoginInput): CustomerLogin
-    addCart(input: CartInput): addCart
+    addCart(input: CartInput): Cart
   }
 
   type Shop {
@@ -69,7 +70,11 @@ const typeDefs = `
   type Cart {
     id: ID,
     id_shop: ID,
-    shop: Shop
+    shop: Shop,
+    id_customer: ID,
+    state: Int,
+    updated_at: DateTime,
+    created_at: DateTime
   }
 
   type Shop {
@@ -91,6 +96,16 @@ const typeDefs = `
     message: String,
     detail: Detail
   }
+
+  type CartDetail{
+    id: ID,
+    id_cart: ID,
+    id_product: ID,
+    quantity: Int,
+    cart: [Cart],
+    product: [Product]
+  }
+
 
   input CustomerInput {
     first_name: String!,
