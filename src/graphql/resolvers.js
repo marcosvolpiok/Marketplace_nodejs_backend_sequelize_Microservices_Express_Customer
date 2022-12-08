@@ -82,6 +82,15 @@ const resolvers = {
 
       return await orderServiceOb.listByIdShop(res);
     },
+
+    async getOrderByIdAndHash(root, args, context) {
+      const res = context.res;
+      const req = context.req;
+      req.params.id = args.idOrder;
+      req.params.hash = args.hash;
+
+      return await orderServiceOb.listById(req, res);
+    },
   },
 
   Mutation: {

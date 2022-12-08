@@ -20,6 +20,7 @@ const typeDefs = `
     getOrder: [Order]   
     getOrderByCustomer: [Order]
     getOrderByShop: [Order]
+    getOrderByIdAndHash(idOrder: ID!, hash: String): Order
   }
 
   type Mutation {
@@ -124,7 +125,12 @@ const typeDefs = `
     total_amount: Float,
     updated_at: DateTime,
     created_at: DateTime,
-    shop: Shop 
+    shop: Shop,
+    state: String,
+    message: String
+    customer: Customer,
+    orderProduct: OrderProduct,
+    orderState: OrderState
   }
 
   type Order {
@@ -140,6 +146,38 @@ const typeDefs = `
     id_cart: ID,
     total_amount: String,
     id_state: ID
+  }
+
+  type Customer {
+    id: ID,
+    id_shop: ID,
+    first_name: String,
+    last_name: String,
+    password: String,
+    mail: String,
+    address: String,
+    phone: String,
+    updateAt: DateTime,
+    createdAt: DateTime
+  }
+
+  type OrderProduct {
+    id: ID,
+    id_order: ID,
+    id_product: ID,
+    quantity: Int,
+    name: String,
+    price: String,
+    updated_at: DateTime,
+    created_at: DateTime
+  }
+
+  type OrderState {
+    id: ID,
+    name: String,
+    description: String,
+    updated_at: DateTime,
+    created_at: DateTime
   }
 
 
