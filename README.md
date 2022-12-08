@@ -31,3 +31,10 @@ redis-commander
 
 # To do
 -listByIdShop method is fetching data of all the shops when the user is not a shop
+
+# Microservices
+-Product
+-Shop
+-Customer
+-Cart
+-Orders
