@@ -115,6 +115,15 @@ const resolvers = {
 
       return await orderServiceOb.addFromCart(req, res);
     },    
+
+    async updateOrder(_, { input }, context) {
+      const res = context.res;
+      const req = context.req;
+      req.body = {id_state: input.idState};
+      req.params = {id: input.idOrder};
+
+      return await orderServiceOb.update(req, res);
+    },
   }   
 }
 

@@ -28,6 +28,7 @@ const typeDefs = `
     addCart(input: CartInput): Cart
     updateCart(input: CartUpdateInput): Cart 
     createOrderFromCart(input: CreateOrderFromCartInput): Order
+    updateOrder(input: UpdateOrderInput): Order
   }
 
   type Shop {
@@ -170,6 +171,11 @@ const typeDefs = `
 
   input CreateOrderFromCartInput {
     idCart: ID
+  }
+
+  input UpdateOrderInput {
+    idOrder: ID!,
+    idState: ID!
   }
 
   scalar DateTime
